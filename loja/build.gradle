@@ -1,0 +1,15 @@
+// Apply the java-library plugin to add support for Java Library
+apply plugin: 'java-library'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+     mavenCentral()
+}
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE")
+}
+
