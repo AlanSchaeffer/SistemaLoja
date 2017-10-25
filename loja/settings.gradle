@@ -16,3 +16,6 @@ include 'services:webservice'
 */
 
 rootProject.name = 'loja'
+
+include ":controller"
+project(":controller").projectDir = new File(settingsDir, '../controller')
