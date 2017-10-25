@@ -1,0 +1,12 @@
+description = 'Sistema Loja'
+version = '1.0'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE")
+}
