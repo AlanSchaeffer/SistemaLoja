@@ -19,3 +19,9 @@ rootProject.name = 'loja'
 
 include ":controller"
 project(":controller").projectDir = new File(settingsDir, '../controller')
+
+include ":service"
+project(":service").projectDir = new File(settingsDir, "../service")
+
+include ":model"
+project(":model").projectDir = new File(settingsDir, "../model")
