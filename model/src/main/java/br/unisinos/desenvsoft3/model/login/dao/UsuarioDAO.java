@@ -1,36 +1,35 @@
 package br.unisinos.desenvsoft3.model.login.dao;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.unisinos.desenvsoft3.model.generic.dao.DataAccessManager;
+import br.unisinos.desenvsoft3.model.generic.util.HQLBuilder;
 import br.unisinos.desenvsoft3.model.login.domain.Usuario;
 
 @Repository
 public class UsuarioDAO {
 
-	@Resource
-	private EntityManager entityManager;
-	
-	@Resource
+	@Autowired
 	private DataAccessManager dataAccessManager;
 	
-	public Integer conta() {
-		return ((Number) entityManager.createQuery(" SELECT COUNT(*) FROM Usuario ").getSingleResult()).intValue();
-	}
-	
-	public List<String> listarNomes() {
-		return dataAccessManager.entity(Usuario.class).list().stream().map(Usuario::getName).collect(Collectors.toList());
+	public boolean existeComNomeOuEmail(String nome, String email) {
+		HQLBuilder hql = new HQLBuilder()
+				.append(" SELECT COUNT(*) ")
+				.append(" FROM Usuario usuario ")
+				.append(" WHERE usuario.nome = :nome ", nome)
+				.append(" OR usuario.email = :email ", email);
+		
+		return dataAccessManager.query(hql.toString())
+								.namedParameters(hql.namedParameters())
+								.<Number>uniqueResult()
+								.intValue() > 0;
 	}
 
 	@Transactional
-	public void save(Usuario usuario) {
+	public void salvar(Usuario usuario) {
 		dataAccessManager.entity(Usuario.class).save(usuario);
 		dataAccessManager.flush();
 	}

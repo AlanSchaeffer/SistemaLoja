@@ -23,12 +23,12 @@ public class Usuario {
 	private Integer id;
 
 	@NotBlank
-	@Column(name = "NAME")
-	private String name;
+	@Column(name = "NOME")
+	private String nome;
 
 	@NotNull
-	@Column(name = "PASSWORD")
-	private String password;
+	@Column(name = "SENHA")
+	private String senha;
 
 	@NotNull
 	@Column(name = "EMAIL")
@@ -42,24 +42,24 @@ public class Usuario {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getPassword() {
-		return password;
+	public String getNome() {
+		return nome;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public void setEmail(String email) {
