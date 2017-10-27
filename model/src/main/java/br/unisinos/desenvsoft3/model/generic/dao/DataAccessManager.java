@@ -1,12 +1,12 @@
 package br.unisinos.desenvsoft3.model.generic.dao;
 
-import java.util.List;
-
-import br.unisinos.desenvsoft3.model.login.domain.Usuario;
+import org.hibernate.Criteria;
 
 public interface DataAccessManager {
 
-	<T> List<T> findAll(Class<T> clazz);
-	void save(Usuario usuario);
+	<T> EntityHandler<T> entity(Class<T> type);
+	QueryExecutor query(String hql);
+	
+	<T> Criteria criteria(Class<T> clazz);
 	void flush();
 }

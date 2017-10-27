@@ -26,12 +26,12 @@ public class UsuarioDAO {
 	}
 	
 	public List<String> listarNomes() {
-		return dataAccessManager.findAll(Usuario.class).stream().map(Usuario::getName).collect(Collectors.toList());
+		return dataAccessManager.entity(Usuario.class).list().stream().map(Usuario::getName).collect(Collectors.toList());
 	}
 
 	@Transactional
 	public void save(Usuario usuario) {
-		dataAccessManager.save(usuario);
+		dataAccessManager.entity(Usuario.class).save(usuario);
 		dataAccessManager.flush();
 	}
 }
