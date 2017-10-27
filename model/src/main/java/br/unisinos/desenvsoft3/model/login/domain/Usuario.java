@@ -23,8 +23,8 @@ public class Usuario {
 	private Integer id;
 
 	@NotBlank
-	@Column(name = "NOME")
-	private String nome;
+	@Column(name = "NAME")
+	private String name;
 
 	@NotNull
 	@Column(name = "PASSWORD")
@@ -37,4 +37,32 @@ public class Usuario {
 	@Version
 	@Column(name = "VERSION")
 	private Integer version;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
