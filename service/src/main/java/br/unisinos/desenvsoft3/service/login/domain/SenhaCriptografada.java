@@ -1,6 +1,6 @@
 package br.unisinos.desenvsoft3.service.login.domain;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class SenhaCriptografada {
 
@@ -12,6 +12,6 @@ public class SenhaCriptografada {
 
 	@Override
 	public String toString() {
-		return DigestUtils.md5Hex(senha);
+		return new BCryptPasswordEncoder().encode(senha);
 	}
 }

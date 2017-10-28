@@ -27,6 +27,17 @@ public class UsuarioDAO {
 								.<Number>uniqueResult()
 								.intValue() > 0;
 	}
+	
+	public Usuario getUsuario(String nomeOuEmail) {
+		HQLBuilder hql = new HQLBuilder()
+				.append(" SELECT usuario ")
+				.append(" FROM Usuario usuario ")
+				.append(" WHERE usuario.nome = :nomeOuEmail OR usuario.email = :nomeOuEmail ", nomeOuEmail);
+		
+		return dataAccessManager.query(hql.toString())
+								.namedParameters(hql.namedParameters())
+								.uniqueResult();
+	}
 
 	@Transactional
 	public void salvar(Usuario usuario) {
