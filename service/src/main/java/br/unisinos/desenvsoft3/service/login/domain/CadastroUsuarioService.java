@@ -16,6 +16,10 @@ public class CadastroUsuarioService {
 	
 	public GenericResponse cadastrar(CadastroUsuarioRequest request) {
 		return ValidationContext.forBean(request)
+								.ifValid(r -> r.getNome() != null, "Nome obrigatório")
+								.ifValid(r -> r.getSenha() != null, "Senha obrigatória")
+								.ifValid(r -> r.getEmail() != null, "E-mail obrigatório")
+								.ifValid(r -> r.getNome().matches("[a-zA-Z0-9]+"), "Nome deve conter somente caracteres alfa-numéricos")
 								.ifValid(r -> !isUsuarioJaCadastrado(r), "Nome de usuário ou e-mail já cadastrado")
 								.ifValid(r -> validaEmail(r), "E-mail inválido")
 								.thenDo(r -> {
