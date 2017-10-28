@@ -21,6 +21,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.userService.login(this.user);
+    this.userService.login(this.user)
+      .subscribe(result => {
+        if (result === true) {
+          alert("OK");
+        }
+        else {
+          alert("NOT OK");
+        }
+      }, error => { console.log(error); });
   }
 }
