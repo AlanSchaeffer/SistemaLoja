@@ -21,14 +21,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-				   .authorizeRequests()
+				   .authorizeRequests()				   
 				   		.antMatchers("/services/usuario/cadastrar").authenticated()
 				   		.anyRequest().permitAll()
 				   .and()
 				// We filter the api/login requests
 				   .addFilterBefore(new JWTLoginFilter("/services/usuario/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
 				// And filter other requests to check the presence of JWT in header
-				   .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+				   .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+				   .addFilter(new RestConfig().corsFilter());
 	}
 
 	@Override
