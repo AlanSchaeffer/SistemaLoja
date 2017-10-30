@@ -21,8 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-				   .authorizeRequests()				   
-				   		.antMatchers("/services/usuario/cadastrar").authenticated()
+				   .authorizeRequests()
 				   		.anyRequest().permitAll()
 				   .and()
 				// We filter the api/login requests
