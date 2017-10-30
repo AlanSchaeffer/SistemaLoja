@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,11 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
   user: User = {
     email: "",
-    password: ""
+    password: "",
+    name: ""
   };
   
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService, private router: Router) { 
     
   }
 
@@ -24,11 +26,11 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user)
       .subscribe(result => {
         if (result === true) {
-          alert("OK");
+          this.router.navigate(['/admin']);
         }
         else {
-          alert("NOT OK");
+          alert("Usuário e/ ou senha inválidos");
         }
-      }, error => { console.log(error); });
+      }, error => { alert("Ocorreu um erro na autenticação, tente novamente mais tarde."); });
   }
 }
