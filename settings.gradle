@@ -15,7 +15,9 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'controller'
+rootProject.name = 'Sistema Loja WAR'
 
+include ":loja"
+include ":controller"
 include ":service"
-project(":service").projectDir = new File(settingsDir, "../service")
+include ":model"
