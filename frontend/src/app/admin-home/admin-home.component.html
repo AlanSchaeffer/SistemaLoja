@@ -1,12 +1,12 @@
 <div *ngIf="userIsAdmin(); else isCustomer">
   <p>
-    <a href="users">Cadastrar produtos</a>
+    <a href="#">Cadastrar produtos</a>
   </p>
 </div>
 <ng-template #isCustomer>
   <div>
     <p>
-      <a href="users">Adicionar produtos ao carrinho</a>
+      <a href="#">Adicionar produtos ao carrinho</a>
     </p>
   </div>  
 </ng-template>

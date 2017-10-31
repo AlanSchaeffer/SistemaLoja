@@ -31,7 +31,7 @@ export class UserService {
 
   register(user: User): Observable<boolean>{    
     return this.http
-      .post(this.registerUrl, { email: user.email, senha: user.password, nome: user.name }, this.getHeaders())
+      .post(this.registerUrl, { email: user.email, senha: user.password, nome: user.name })
       .map((response) =>
       {        
         return response.ok === true;
