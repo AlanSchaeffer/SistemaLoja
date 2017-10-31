@@ -19,4 +19,13 @@ dependencies {
     compile "com.h2database:h2:1.4.196"
     
     compile project(":controller")
+    compile files('build/resources/')
+
 }
+
+task copy(type: Copy) {
+    from '../frontend/src'
+    into 'build/resources/public'
+}
+
+assemble.dependsOn copy
