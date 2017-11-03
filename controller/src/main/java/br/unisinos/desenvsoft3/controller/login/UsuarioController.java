@@ -1,7 +1,6 @@
-package br.unisinos.desenvsoft3.controller;
+package br.unisinos.desenvsoft3.controller.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +21,8 @@ public class UsuarioController {
 	private CadastroUsuarioService cadastroUsuarioService;
 	
 	@PostMapping(value="/cadastrar")
-	public ResponseEntity<GenericResponse> cadastrar(@RequestBody CadastroUsuarioRequest request) {
+	public GenericResponse cadastrar(@RequestBody CadastroUsuarioRequest request) {
 		GenericResponse response = cadastroUsuarioService.cadastrar(request);
-		return ResponseEntity.ok().body(response);
+		return response;
 	}
 }
