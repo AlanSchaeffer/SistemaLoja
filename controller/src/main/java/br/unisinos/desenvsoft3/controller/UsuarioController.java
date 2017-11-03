@@ -1,7 +1,6 @@
 package br.unisinos.desenvsoft3.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,13 +24,6 @@ public class UsuarioController {
 	@PostMapping(value="/cadastrar")
 	public ResponseEntity<GenericResponse> cadastrar(@RequestBody CadastroUsuarioRequest request) {
 		GenericResponse response = cadastroUsuarioService.cadastrar(request);
-		
-		if(response.isSuccess()) {
-			return ResponseEntity.ok().build();
-		} else {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(response);
-		}
+		return ResponseEntity.ok().body(response);
 	}
-	
-	
 }
