@@ -23,13 +23,13 @@ public class UsuarioController {
 	private CadastroUsuarioService cadastroUsuarioService;
 	
 	@PostMapping(value="/cadastrar")
-	public ResponseEntity<String> cadastrar(@RequestBody CadastroUsuarioRequest request) {
+	public ResponseEntity<GenericResponse> cadastrar(@RequestBody CadastroUsuarioRequest request) {
 		GenericResponse response = cadastroUsuarioService.cadastrar(request);
 		
 		if(response.isSuccess()) {
 			return ResponseEntity.ok().build();
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(response.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(response);
 		}
 	}
 	
