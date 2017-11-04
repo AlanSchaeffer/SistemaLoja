@@ -1,4 +1,4 @@
-package br.unisinos.desenvsoft3.controller.produto;
+package br.unisinos.desenvsoft3.controller.webservice.produto;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

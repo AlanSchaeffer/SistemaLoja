@@ -1,4 +1,4 @@
-package br.unisinos.desenvsoft3.controller.login;
+package br.unisinos.desenvsoft3.controller.frontend.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 	@RequestMapping("/admin")
 	public String index() {
-		return "../index.html";
+		return "/index.html";
 	}
 }

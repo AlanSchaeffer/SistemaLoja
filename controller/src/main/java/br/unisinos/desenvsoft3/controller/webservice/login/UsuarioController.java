@@ -1,4 +1,4 @@
-package br.unisinos.desenvsoft3.controller.login;
+package br.unisinos.desenvsoft3.controller.webservice.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
