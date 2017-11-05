@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				   .authorizeRequests()
+				   		.antMatchers("/services/produtos/salvar").hasRole("ADMIN")
 				   		.anyRequest().permitAll()
 				   .and()
 				// We filter the api/login requests
