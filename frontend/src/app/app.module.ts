@@ -6,12 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-import { UserService } from './user.service'
+import { UserService } from './user.service';
+import { ProductsService } from './products.service';
 
 import { RouterModule }   from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,19 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     UsersComponent,
     AdminHomeComponent,
-    HomeComponent    
+    HomeComponent,
+    ProductsComponent,
+    ProductListComponent    
   ],
   imports: [
     HttpModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent  
+      },
       {
         path: 'login',
         component: LoginComponent
@@ -39,12 +48,12 @@ import { HomeComponent } from './home/home.component';
         component: AdminHomeComponent
       },
       {
-        path: '',
-        component: HomeComponent  
+        path: 'products',
+        component: ProductListComponent  
       }
     ])
   ],
-  providers: [UserService],
+  providers: [UserService, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
