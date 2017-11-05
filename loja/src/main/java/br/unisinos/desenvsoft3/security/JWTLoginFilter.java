@@ -26,17 +26,25 @@ import br.unisinos.desenvsoft3.service.login.domain.LoginRequest;
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
 	private ContaAdministrativa contaAdministrativa;
+	private boolean obrigaAdministrador = false;
 
 	public JWTLoginFilter(String url, AuthenticationManager authManager, ContaAdministrativa contaAdministrativa) {
+		this(url, authManager, contaAdministrativa, false);
+	}
+	
+	public JWTLoginFilter(String url, AuthenticationManager authManager, ContaAdministrativa contaAdministrativa, boolean obrigaAdministrador) {
 		super(new AntPathRequestMatcher(url));
 		this.contaAdministrativa = contaAdministrativa;
 		setAuthenticationManager(authManager);
+		this.obrigaAdministrador = obrigaAdministrador;
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException, IOException, ServletException {
 		LoginRequest creds = new ObjectMapper().readValue(req.getInputStream(), LoginRequest.class);
+		validaAdministrador(creds);
+		
 		List<GrantedAuthority> authorities = createAuthoritiesForUser(creds.getUsernameOrEmail());
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(creds.getUsernameOrEmail(), creds.getPassword(), authorities);
 		return getAuthenticationManager().authenticate(token);
@@ -47,6 +55,14 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 			return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		} else {
 			return Collections.emptyList();
+		}
+	}
+	
+	private void validaAdministrador(LoginRequest creds) {
+		if(obrigaAdministrador) {
+			if(!contaAdministrativa.isUsuarioAdministrador(creds.getUsernameOrEmail())) {
+				throw new RuntimeException("Usuário inválido.");
+			}
 		}
 	}
 
