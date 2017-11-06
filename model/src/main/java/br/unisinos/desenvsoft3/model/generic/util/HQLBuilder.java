@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class HQLBuilder {
 
 	private StringBuilder hql = new StringBuilder();
@@ -38,6 +40,15 @@ public class HQLBuilder {
 			append(snippet, param);
 		}
 		return this;
+	}
+	
+	public HQLBuilder appendNullable(String snippet, Object param) {
+		boolean notNullValue = param != null;
+		if(param instanceof String) {
+			notNullValue = StringUtils.isNotBlank((String) param);
+		}
+		
+		return appendOnCondition(snippet, param, notNullValue);
 	}
 	
 	@Override
