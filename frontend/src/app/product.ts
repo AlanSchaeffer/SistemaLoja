@@ -5,4 +5,5 @@ export class Product {
   description: string;
   quantity: number;
   isNew: boolean;
+  available: boolean;
 }
