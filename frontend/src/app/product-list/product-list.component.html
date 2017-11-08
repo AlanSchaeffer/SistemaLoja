@@ -1,0 +1,23 @@
+<div>
+  <h2>Meus Produtos</h2><br />
+  <p>Buscar por nome: <input type="text" [(ngModel)]="filter" /><button (click)="search()">Buscar</button></p>
+  <div *ngIf="loading; else productsLoaded">
+    Carregando produtos...
+  </div>
+  <ng-template #productsLoaded>
+    <div *ngIf="products.length > 0; else noProducts">
+      <li *ngFor="let product of products" (click)="onSelect(product)">
+        <a href="product/{{product.id}}"><span>{{product.id}} - </span> {{product.name}}</a>      
+      </li>
+    </div>
+    <ng-template #noProducts>
+      <div>
+        <h3>Nenhum produto encontrado</h3>
+      </div>
+    </ng-template>
+  </ng-template>
+  
+  <div style="border-top: 1px solid black;padding-top:10px;margin-top:10px;">
+    <a href="new-product/">Criar novo produto</a>
+  </div>
+</div>

@@ -15,10 +15,9 @@ export class UserService {
 
   login(user: User): Observable<boolean>{
     return this.http
-      .post(this.loginUrl, JSON.stringify({ usernameOrEmail: user.email, password: user.password }))
+      .post(this.loginUrl, { usernameOrEmail: user.email, password: user.password })
       .map((response) =>
-      {
-        console.log(response);
+      {        
         let token = response.headers.get("authorization");
         if (token) {
           localStorage.setItem('currentUser', JSON.stringify({ username: user.email, token: token }));

@@ -6,12 +6,17 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-import { UserService } from './user.service'
+import { UserService } from './user.service';
+import { ProductsService } from './products.service';
 
 import { RouterModule }   from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { NewProductComponent } from './new-product/new-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +24,21 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     UsersComponent,
     AdminHomeComponent,
-    HomeComponent    
+    HomeComponent,
+    ProductsComponent,
+    ProductListComponent,
+    NewProductComponent,
+    EditProductComponent    
   ],
   imports: [
     HttpModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent  
+      },
       {
         path: 'login',
         component: LoginComponent
@@ -39,12 +52,20 @@ import { HomeComponent } from './home/home.component';
         component: AdminHomeComponent
       },
       {
-        path: '',
-        component: HomeComponent  
+        path: 'products',
+        component: ProductListComponent  
+      },
+      {
+        path: 'new-product',
+        component: NewProductComponent
+      },
+      {
+        path: 'product/:id',
+        component: EditProductComponent
       }
     ])
   ],
-  providers: [UserService],
+  providers: [UserService, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,23 @@
+<div>
+  <label>Nome:</label><br />
+  <input type="text" [(ngModel)]="product.name" />
+</div>
+<div>
+  <label>Descrição:</label><br />
+  <textarea [(ngModel)]="product.description">
+  </textarea>
+</div>
+<div>
+  <label>Preço:</label><br />
+  <input type="text" [(ngModel)]="product.price" />
+</div>
+<div>
+  <label>Quantidade em Estoque:</label><br />
+  <input type="text" [(ngModel)]="product.quantity" />
+</div>
+<div>
+  <button (click)="save()">Salvar</button>
+</div>
+<div>
+  <a href="products/">Voltar para lista de produtos</a>
+</div>

@@ -29,7 +29,7 @@ public class ProdutoController {
 	
 	@RequestMapping("/listar")
 	public ListaDeProdutosResponse listar(@RequestBody ProdutoFilter filtro) {
-		return new ListaDeProdutosResponse(produtoService.listarProdutos(new ProdutoFilter()));
+		return new ListaDeProdutosResponse(produtoService.listarProdutos(filtro));
 	}
 	
 	@GetMapping("/{id}")
