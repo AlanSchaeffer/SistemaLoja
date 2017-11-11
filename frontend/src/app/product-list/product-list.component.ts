@@ -12,8 +12,8 @@ import 'rxjs/add/observable/throw';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  private loading: boolean = true;
-  private filter: string = "";
+  loading: boolean = true;
+  filter: string = "";
   products: Product[];
   selectedProduct: Product = new Product();
 
