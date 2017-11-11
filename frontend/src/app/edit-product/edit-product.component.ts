@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EditProductComponent implements OnInit {
   product: Product;
   private sub: any;
-  private loading: boolean = true;
+  loading: boolean = true;
   
   constructor(private productsService: ProductsService, private route: ActivatedRoute) { }
 
