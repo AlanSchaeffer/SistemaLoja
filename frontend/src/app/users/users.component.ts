@@ -22,11 +22,11 @@ export class UsersComponent implements OnInit {
 
   register() {
     this.userService.register(this.user).subscribe(result => {
-      if (result) {
+      if (result.success === true) {
         alert("Usuário cadastrado com sucesso!");
         this.router.navigate(['']);
       } else {
-        alert("Erro ao cadastrar usuário");
+        alert("Erro ao cadastrar usuário: " + result.message);
       }
     });
   }

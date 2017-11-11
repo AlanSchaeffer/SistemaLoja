@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/site")
 @Controller
 public class SiteController {
 	private static final String HTML_FILE = "/index.html";
@@ -29,6 +28,11 @@ public class SiteController {
 		return HTML_FILE;
 	}
 	
+	@RequestMapping("/admin/login")
+	public String siteAdminLogin() {
+		return HTML_FILE;
+	}
+
 	@RequestMapping("/admin/products")
 	public String siteAdminProducts() {
 		return HTML_FILE;

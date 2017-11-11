@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { User } from './user';
+import { ServerResponse } from './server.response';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -29,12 +30,16 @@ export class UserService {
       }).catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  register(user: User): Observable<boolean>{    
+  register(user: User): Observable<ServerResponse>{    
     return this.http
       .post(this.registerUrl, { email: user.email, senha: user.password, nome: user.name })
       .map((response) =>
-      {        
-        return response.ok === true;
+      {
+        var jsonResponse = response.json();
+        var serverResponse = new ServerResponse();
+        serverResponse.success = jsonResponse.success;
+        serverResponse.message = jsonResponse.message;
+        return serverResponse;
       }).catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
