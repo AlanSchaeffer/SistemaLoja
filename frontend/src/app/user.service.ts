@@ -9,13 +9,14 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class UserService {
   private loginUrl:string = "http://localhost:8080/services/usuario/login";
+  private loginAdminUrl:string = "http://localhost:8080/services/admin/login";
   private registerUrl:string = "http://localhost:8080/services/usuario/cadastrar";
 
   constructor(private http:Http) { }
 
-  login(user: User): Observable<boolean>{
+  login(user: User, admin: boolean): Observable<boolean>{
     return this.http
-      .post(this.loginUrl, { usernameOrEmail: user.email, password: user.password })
+      .post(admin ? this.loginAdminUrl : this.loginUrl, { usernameOrEmail: user.email, password: user.password })
       .map((response) =>
       {        
         let token = response.headers.get("authorization");

@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.userService.login(this.user)
+    this.userService.login(this.user, false)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/customer']);
         }
         else {
           alert("Usuário e/ ou senha inválidos");

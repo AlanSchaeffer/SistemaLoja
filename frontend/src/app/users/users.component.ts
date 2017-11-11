@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -14,7 +15,7 @@ export class UsersComponent implements OnInit {
     name: ""
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,7 @@ export class UsersComponent implements OnInit {
     this.userService.register(this.user).subscribe(result => {
       if (result) {
         alert("Usuário cadastrado com sucesso!");
+        this.router.navigate(['']);
       } else {
         alert("Erro ao cadastrar usuário");
       }

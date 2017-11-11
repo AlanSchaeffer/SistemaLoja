@@ -17,6 +17,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { CustomerHomeComponentComponent } from './customer-home-component/customer-home-component.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     ProductsComponent,
     ProductListComponent,
     NewProductComponent,
-    EditProductComponent    
+    EditProductComponent,
+    CustomerHomeComponentComponent    
   ],
   imports: [
     HttpModule,
@@ -46,6 +48,10 @@ import { EditProductComponent } from './edit-product/edit-product.component';
       {
         path: 'users',
         component: UsersComponent
+      },
+      {
+        path: 'customer',
+        component: AdminHomeComponent
       },
       {
         path: 'admin',
