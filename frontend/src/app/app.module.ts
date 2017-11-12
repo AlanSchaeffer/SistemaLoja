@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 
 import { UserService } from './user.service';
 import { ProductsService } from './products.service';
+import { CartService } from './cart-service';
 
 import { RouterModule }   from '@angular/router';
 import { UsersComponent } from './users/users.component';
@@ -18,6 +19,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
     ProductListComponent,
     NewProductComponent,
     EditProductComponent,
-    CustomerHomeComponent
+    CustomerHomeComponent,
+    ShoppingCartComponent
   ],
   imports: [
     HttpModule,
@@ -58,6 +61,10 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
         component: CustomerHomeComponent
       },
       {
+        path: 'shopping-cart',
+        component: ShoppingCartComponent
+      },
+      {
         path: 'admin',
         component: AdminHomeComponent
       },
@@ -75,7 +82,7 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
       }
     ])
   ],
-  providers: [UserService, ProductsService],
+  providers: [UserService, ProductsService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
