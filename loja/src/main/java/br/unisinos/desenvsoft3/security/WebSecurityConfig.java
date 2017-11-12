@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.unisinos.desenvsoft3.service.login.domain.LoginService;
+import br.unisinos.desenvsoft3.sistema.login.UsuarioBean;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +22,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ContaAdministrativa contaAdministrativa;
 	
+	@Autowired
+	private JWTLoginHelperService jwtLoginHelperService;
+	
+	@Autowired
+	private UsuarioBean usuarioBean;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
@@ -29,10 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				   		.anyRequest().permitAll()
 				   .and()
 				// We filter the api/login requests
-				   .addFilterBefore(new JWTLoginFilter("/services/usuario/login", authenticationManager(), contaAdministrativa), UsernamePasswordAuthenticationFilter.class)
-				   .addFilterBefore(new JWTLoginFilter("/services/admin/login", authenticationManager(), contaAdministrativa, true), UsernamePasswordAuthenticationFilter.class)
+				   .addFilterBefore(new JWTLoginFilter("/services/usuario/login", authenticationManager(), jwtLoginHelperService), UsernamePasswordAuthenticationFilter.class)
+				   .addFilterBefore(new JWTLoginFilter("/services/admin/login", authenticationManager(), jwtLoginHelperService, true), UsernamePasswordAuthenticationFilter.class)
 				// And filter other requests to check the presence of JWT in header
-				   .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+				   .addFilterBefore(new JWTAuthenticationFilter(usuarioBean), UsernamePasswordAuthenticationFilter.class)
 				   .addFilter(new RestConfig().corsFilter());
 	}
 

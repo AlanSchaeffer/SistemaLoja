@@ -38,4 +38,15 @@ public class LoginService implements UserDetailsService {
 		List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
 		return new User(usuario.getNome(), usuario.getSenha(), true, true, true, true, authorities);
 	}
+
+	@Transactional
+	public Integer getIdUsuarioByName(String usernameOrEmail) {
+		Usuario usuario = usuarioDAO.getUsuario(usernameOrEmail);
+		
+		if(usuario == null) {
+			throw new IllegalArgumentException("Usuário inexistente");
+		} else {
+			return usuario.getId();
+		}
+	}
 }
