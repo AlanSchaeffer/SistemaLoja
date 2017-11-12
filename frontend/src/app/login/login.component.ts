@@ -23,10 +23,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.userService.login(this.user)
+    var admin: boolean = this.router.url.indexOf('admin') > -1;
+
+    this.userService.login(this.user, admin)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/admin']);
+          if (admin){
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/customer']);  
+          }            
         }
         else {
           alert("Usuário e/ ou senha inválidos");
