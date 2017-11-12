@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
 import { ProductsService } from './products.service';
 import { CartService } from './cart-service';
+import { OrderService } from './order-service';
 
 import { RouterModule }   from '@angular/router';
 import { UsersComponent } from './users/users.component';
@@ -20,6 +21,7 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     NewProductComponent,
     EditProductComponent,
     CustomerHomeComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    CustomerOrdersComponent
   ],
   imports: [
     HttpModule,
@@ -82,7 +85,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       }
     ])
   ],
-  providers: [UserService, ProductsService, CartService],
+  providers: [UserService, ProductsService, CartService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

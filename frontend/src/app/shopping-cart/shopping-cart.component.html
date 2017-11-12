@@ -1,3 +1,16 @@
-<p>
-  shopping-cart works!
-</p>
+<div>
+  <div *ngIf="order != null && order.orderItems != null && order.orderItems.length > 0" style="width: 40%;margin: 0 auto;">
+    <table>
+      <tbody>
+        <tr *ngFor="let item of order.orderItems">
+          <td>{{item.product.id}}</td>
+          <td>{{item.product.name}} R${{item.product.price}}</td>
+          <td>Quantidade: {{item.quantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    Total: R$ {{totalCart}} <button (click)="confirmOrder()">Confirmar Pedido!</button>
+  </div>
+</div>
