@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CarrinhoDeComprasView {
 
-	private Double valorTotal;
+	private Double valorTotal = 0D;
 	private List<CarrinhoDeComprasItemView> itens = new ArrayList<>();
 
 	public Double getValorTotal() {
@@ -26,7 +26,7 @@ public class CarrinhoDeComprasView {
 	
 	public void atualizaValorTotal() {
 		setValorTotal(getItens().stream()
-								.mapToDouble(CarrinhoDeComprasItemView::getValorProduto)
+								.mapToDouble(item -> item.getValorProduto() * item.getQuantidade())
 								.sum());
 	}
 }

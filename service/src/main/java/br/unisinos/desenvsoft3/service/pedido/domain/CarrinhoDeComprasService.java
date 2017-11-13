@@ -45,13 +45,16 @@ public class CarrinhoDeComprasService {
 			carrinho.setUsuario(usuarioDAO.carregar(idUsuario));
 		}
 		
-		CarrinhoDeComprasItem item = new CarrinhoDeComprasItem();
-		item.setCarrinhoDeCompras(carrinho);
-		item.setProduto(produto);
-		item.setQuantidade(1);
-		carrinho.getItens().add(item);
+		if(carrinho.getItens().stream().filter(item -> item.getProduto().getId().equals(idProduto)).count() == 0) {
+			CarrinhoDeComprasItem item = new CarrinhoDeComprasItem();
+			item.setCarrinhoDeCompras(carrinho);
+			item.setProduto(produto);
+			item.setQuantidade(1);
+			carrinho.getItens().add(item);
+			
+			carrinhoDeComprasDAO.save(carrinho);
+		}
 		
-		carrinhoDeComprasDAO.save(carrinho);
 		
 		return GenericResponse.ok();
 	}

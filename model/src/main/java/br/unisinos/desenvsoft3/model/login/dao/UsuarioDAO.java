@@ -46,6 +46,6 @@ public class UsuarioDAO {
 	}
 
 	public Usuario carregar(Integer idUsuario) {
-		return dataAccessManager.entity(Usuario.class).load(idUsuario);
+		return dataAccessManager.entity(Usuario.class).get(idUsuario);
 	}
 }

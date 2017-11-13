@@ -8,5 +8,5 @@ public interface EntityHandler<T> {
 	public void save(T bean);
 	public void delete(T bean);
 	public List<T> list();
-	public T load(Serializable id);
+	public T get(Serializable id);
 }

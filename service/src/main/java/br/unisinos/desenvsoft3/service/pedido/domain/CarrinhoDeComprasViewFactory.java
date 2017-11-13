@@ -6,7 +6,7 @@ import br.unisinos.desenvsoft3.model.pedido.domain.CarrinhoDeComprasItem;
 public class CarrinhoDeComprasViewFactory {
 
 	public CarrinhoDeComprasView create(CarrinhoDeCompras carrinho) {
-	CarrinhoDeComprasView view = new CarrinhoDeComprasView();
+		CarrinhoDeComprasView view = new CarrinhoDeComprasView();
 		
 		carrinho.getItens()
 				.stream()
@@ -22,6 +22,7 @@ public class CarrinhoDeComprasViewFactory {
 		view.setIdProduto(item.getProduto().getId());
 		view.setNmProduto(item.getProduto().getNome());
 		view.setValorProduto(item.getProduto().getPreco());
+		view.setQuantidade(item.getQuantidade());
 		return view;
 	}
 }

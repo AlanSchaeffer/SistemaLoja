@@ -5,6 +5,7 @@ public class CarrinhoDeComprasItemView {
 	private Integer idProduto;
 	private String nmProduto;
 	private Double valorProduto;
+	private Integer quantidade;
 
 	public Integer getIdProduto() {
 		return idProduto;
@@ -28,5 +29,13 @@ public class CarrinhoDeComprasItemView {
 
 	public void setValorProduto(Double valorProduto) {
 		this.valorProduto = valorProduto;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 }

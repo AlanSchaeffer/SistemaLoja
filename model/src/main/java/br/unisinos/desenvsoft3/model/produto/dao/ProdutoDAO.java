@@ -27,6 +27,6 @@ public class ProdutoDAO {
 	}
 	
 	public Produto carregar(Integer idProduto) {
-		return dataAccessManager.entity(Produto.class).load(idProduto);
+		return dataAccessManager.entity(Produto.class).get(idProduto);
 	}
 }

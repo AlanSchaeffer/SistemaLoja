@@ -1,5 +1,6 @@
 package br.unisinos.desenvsoft3.model.pedido.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class CarrinhoDeCompras {
 	private Usuario usuario;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "carrinhoDeCompras")
-	private List<CarrinhoDeComprasItem> itens;
+	private List<CarrinhoDeComprasItem> itens = new ArrayList<>();
 
 	@Version
 	@Column(name = "VERSION")
