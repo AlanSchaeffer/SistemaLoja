@@ -8,6 +8,7 @@ import org.springframework.web.context.annotation.RequestScope;
 public class UsuarioBean {
 
 	private Integer idUsuario;
+	private boolean usuarioAdmin;
 
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -15,5 +16,13 @@ public class UsuarioBean {
 
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	public boolean isUsuarioAdmin() {
+		return usuarioAdmin;
+	}
+
+	public void setUsuarioAdmin(boolean usuarioAdmin) {
+		this.usuarioAdmin = usuarioAdmin;
 	}
 }

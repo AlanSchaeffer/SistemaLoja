@@ -1,5 +1,7 @@
 package br.unisinos.desenvsoft3.controller.webservice.produto;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import br.unisinos.desenvsoft3.service.produto.domain.CadastroProdutoRequest;
 import br.unisinos.desenvsoft3.service.produto.domain.ListaDeProdutosResponse;
 import br.unisinos.desenvsoft3.service.produto.domain.ProdutoService;
 
+@Transactional
 @RestController
 @RequestMapping("/services/produtos")
 public class ProdutoController {

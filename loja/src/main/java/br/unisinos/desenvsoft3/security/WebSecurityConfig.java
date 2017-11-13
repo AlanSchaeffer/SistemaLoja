@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 				   .authorizeRequests()
 				   		.antMatchers("/services/produtos/salvar").hasRole("ADMIN")
+				   		.antMatchers("/services/carrinho/*").authenticated()
 				   		.anyRequest().permitAll()
 				   .and()
 				// We filter the api/login requests

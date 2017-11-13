@@ -1,5 +1,7 @@
 package br.unisinos.desenvsoft3.controller.webservice.login;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
 import br.unisinos.desenvsoft3.service.login.domain.CadastroUsuarioRequest;
 import br.unisinos.desenvsoft3.service.login.domain.CadastroUsuarioService;
 
+@Transactional
 @RestController
 @RequestMapping("/services/usuario")
 public class UsuarioController {

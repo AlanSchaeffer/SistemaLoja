@@ -51,7 +51,7 @@ public class Pedido {
 	@Type(type = "status_pedido")
 	private StatusPedido statusPedido = StatusPedido.CRIADO;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pedido")
 	private List<PedidoItem> itens = new ArrayList<>();
 	
 	@Version

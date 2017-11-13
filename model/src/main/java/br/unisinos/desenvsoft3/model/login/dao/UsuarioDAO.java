@@ -44,4 +44,8 @@ public class UsuarioDAO {
 		dataAccessManager.entity(Usuario.class).save(usuario);
 		dataAccessManager.flush();
 	}
+
+	public Usuario carregar(Integer idUsuario) {
+		return dataAccessManager.entity(Usuario.class).load(idUsuario);
+	}
 }
