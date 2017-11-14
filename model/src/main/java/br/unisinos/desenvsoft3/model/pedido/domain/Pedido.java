@@ -54,6 +54,10 @@ public class Pedido {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pedido")
 	private List<PedidoItem> itens = new ArrayList<>();
 	
+	@NotNull
+	@Column(name = "ENDERECO_ENTREGA")
+	private String enderecoEntrega;
+	
 	@Version
 	@Column(name = "VERSION")
 	private Integer version;
@@ -88,5 +92,18 @@ public class Pedido {
 
 	public List<PedidoItem> getItens() {
 		return itens;
+	}
+	
+	public void addItem(PedidoItem item) {
+		getItens().add(item);
+		item.setPedido(this);
+	}
+
+	public String getEnderecoEntrega() {
+		return enderecoEntrega;
+	}
+
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
 	}
 }
