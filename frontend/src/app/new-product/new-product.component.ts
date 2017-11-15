@@ -14,7 +14,8 @@ export class NewProductComponent implements OnInit {
     isNew: true,
     name: "",
     price: null,
-    quantity: 0
+    quantity: 0,
+    quantity_buy: 0
   }
   
   constructor() { }

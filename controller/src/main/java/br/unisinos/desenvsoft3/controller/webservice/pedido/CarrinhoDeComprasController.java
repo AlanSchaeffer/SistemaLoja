@@ -34,10 +34,10 @@ public class CarrinhoDeComprasController {
 		return carrinhoDeComprasService.getCarrinhoDeCompras(usuarioBean.getIdUsuario());
 	}
 	
-	@PostMapping("/add/{idProduto}")
-	public GenericResponse adicionarAoCarrinho(@PathVariable(name = "idProduto") Integer idProduto) {
+	@PostMapping("/add/{idProduto}/{quantidade}")
+	public GenericResponse adicionarAoCarrinho(@PathVariable(name = "idProduto") Integer idProduto, @PathVariable(name = "quantidade") Integer quantidade) {
 		if(!usuarioBean.isUsuarioAdmin()) {
-			return carrinhoDeComprasService.adicionarAoCarrinhoDeCompras(idProduto, usuarioBean.getIdUsuario());
+			return carrinhoDeComprasService.adicionarAoCarrinhoDeCompras(idProduto, usuarioBean.getIdUsuario(), quantidade);
 		}
 		return GenericResponse.ok();
 	}

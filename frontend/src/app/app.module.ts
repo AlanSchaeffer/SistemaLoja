@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 
 import { UserService } from './user.service';
 import { ProductsService } from './products.service';
+import { CartService } from './cart-service';
+import { OrderService } from './order-service';
 
 import { RouterModule }   from '@angular/router';
 import { UsersComponent } from './users/users.component';
@@ -18,6 +20,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
     ProductListComponent,
     NewProductComponent,
     EditProductComponent,
-    CustomerHomeComponent
+    CustomerHomeComponent,
+    ShoppingCartComponent,
+    CustomerOrdersComponent
   ],
   imports: [
     HttpModule,
@@ -58,6 +64,14 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
         component: CustomerHomeComponent
       },
       {
+        path: 'customer-orders',
+        component: CustomerOrdersComponent
+      },
+      {
+        path: 'shopping-cart',
+        component: ShoppingCartComponent
+      },
+      {
         path: 'admin',
         component: AdminHomeComponent
       },
@@ -72,10 +86,14 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
       {
         path: 'admin/products/:id',
         component: EditProductComponent
+      },
+      {
+        path: 'admin/orders',
+        component: CustomerOrdersComponent
       }
     ])
   ],
-  providers: [UserService, ProductsService],
+  providers: [UserService, ProductsService, CartService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

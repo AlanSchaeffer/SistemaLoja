@@ -23,6 +23,11 @@ public class SiteController {
 		return HTML_FILE;
 	}
 	
+	@RequestMapping("/customer-orders")
+	public String siteCustomerOrders() {
+		return HTML_FILE;
+	}
+	
 	@RequestMapping("/admin")
 	public String siteAdmin() {
 		return HTML_FILE;
@@ -38,6 +43,11 @@ public class SiteController {
 		return HTML_FILE;
 	}
 	
+	@RequestMapping("/admin/orders")
+	public String siteAdminOrders() {
+		return HTML_FILE;
+	}
+	
 	@RequestMapping("/admin/products/new")
 	public String siteAdminNewProduct() {
 		return HTML_FILE;
@@ -50,6 +60,11 @@ public class SiteController {
 	
 	@RequestMapping("/users")
 	public String siteUsers() {
+		return HTML_FILE;
+	}
+	
+	@RequestMapping("/shopping-cart")
+	public String siteShoppingCart() {
 		return HTML_FILE;
 	}
 }
