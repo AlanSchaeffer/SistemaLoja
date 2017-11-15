@@ -1,5 +1,7 @@
 package br.unisinos.desenvsoft3.controller.webservice.produto;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoFilter;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoView;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoFilter;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoView;
 import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
 import br.unisinos.desenvsoft3.service.produto.domain.CadastroProdutoRequest;
 import br.unisinos.desenvsoft3.service.produto.domain.ListaDeProdutosResponse;
 import br.unisinos.desenvsoft3.service.produto.domain.ProdutoService;
 
+@Transactional
 @RestController
 @RequestMapping("/services/produtos")
 public class ProdutoController {

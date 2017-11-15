@@ -35,6 +35,13 @@ public class HQLBuilder {
 		return this;
 	}
 	
+	public HQLBuilder appendOnCondition(String snippet, boolean condition) {
+		if(condition) {
+			append(snippet);
+		}
+		return this;
+	}
+	
 	public HQLBuilder appendOnCondition(String snippet, Object param, boolean condition) {
 		if(condition) {
 			append(snippet, param);

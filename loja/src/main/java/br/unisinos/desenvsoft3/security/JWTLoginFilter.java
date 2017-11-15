@@ -25,16 +25,16 @@ import br.unisinos.desenvsoft3.service.login.domain.LoginRequest;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-	private ContaAdministrativa contaAdministrativa;
 	private boolean obrigaAdministrador = false;
+	private JWTLoginHelperService jwtLoginHelperService;
 
-	public JWTLoginFilter(String url, AuthenticationManager authManager, ContaAdministrativa contaAdministrativa) {
-		this(url, authManager, contaAdministrativa, false);
+	public JWTLoginFilter(String url, AuthenticationManager authManager, JWTLoginHelperService jwtLoginHelperService) {
+		this(url, authManager, jwtLoginHelperService, false);
 	}
 	
-	public JWTLoginFilter(String url, AuthenticationManager authManager, ContaAdministrativa contaAdministrativa, boolean obrigaAdministrador) {
+	public JWTLoginFilter(String url, AuthenticationManager authManager, JWTLoginHelperService jwtLoginHelperService, boolean obrigaAdministrador) {
 		super(new AntPathRequestMatcher(url));
-		this.contaAdministrativa = contaAdministrativa;
+		this.jwtLoginHelperService = jwtLoginHelperService;
 		setAuthenticationManager(authManager);
 		this.obrigaAdministrador = obrigaAdministrador;
 	}
@@ -51,7 +51,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	}
 	
 	private List<GrantedAuthority> createAuthoritiesForUser(String username) {
-		if(contaAdministrativa.isUsuarioAdministrador(username)) {
+		if(jwtLoginHelperService.isUsuarioAdministrador(username)) {
 			return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		} else {
 			return Collections.emptyList();
@@ -60,7 +60,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	
 	private void validaAdministrador(LoginRequest creds) {
 		if(obrigaAdministrador) {
-			if(!contaAdministrativa.isUsuarioAdministrador(creds.getUsernameOrEmail())) {
+			if(!jwtLoginHelperService.isUsuarioAdministrador(creds.getUsernameOrEmail())) {
 				throw new RuntimeException("Usuário inválido.");
 			}
 		}
@@ -70,10 +70,11 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
 		String role = null;
+		Integer idUsuario = jwtLoginHelperService.getIdUsuario(auth.getName());
 		if(!auth.getAuthorities().isEmpty()) {
 			role = auth.getAuthorities().iterator().next().getAuthority();
 		}
 		
-		TokenAuthenticationService.addAuthentication(res, auth.getName(), role);
+		TokenAuthenticationService.addAuthentication(res, auth.getName(), role, idUsuario);
 	}
 }

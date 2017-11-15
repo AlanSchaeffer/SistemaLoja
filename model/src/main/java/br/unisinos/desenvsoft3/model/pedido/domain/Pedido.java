@@ -1,6 +1,7 @@
 package br.unisinos.desenvsoft3.model.pedido.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -43,6 +44,10 @@ public class Pedido {
 	private Usuario usuario;
 	
 	@NotNull
+	@Column(name = "DT_PEDIDO")
+	private Date dtPedido;
+	
+	@NotNull
 	@Column(name = "VL_FRETE")
 	private Double vlFrete;
 	
@@ -51,8 +56,12 @@ public class Pedido {
 	@Type(type = "status_pedido")
 	private StatusPedido statusPedido = StatusPedido.CRIADO;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pedido")
 	private List<PedidoItem> itens = new ArrayList<>();
+	
+	@NotNull
+	@Column(name = "ENDERECO_ENTREGA")
+	private String enderecoEntrega;
 	
 	@Version
 	@Column(name = "VERSION")
@@ -88,5 +97,26 @@ public class Pedido {
 
 	public List<PedidoItem> getItens() {
 		return itens;
+	}
+	
+	public void addItem(PedidoItem item) {
+		itens.add(item);
+		item.setPedido(this);
+	}
+
+	public String getEnderecoEntrega() {
+		return enderecoEntrega;
+	}
+
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public Date getDtPedido() {
+		return dtPedido;
+	}
+
+	public void setDtPedido(Date dtPedido) {
+		this.dtPedido = dtPedido;
 	}
 }

@@ -32,7 +32,7 @@ class HibernateEntityHandler<T> implements EntityHandler<T> {
 	}
 
 	@Override
-	public T load(Serializable id) {
-		return session.load(type, id);
+	public T get(Serializable id) {
+		return session.get(type, id);
 	}
 }

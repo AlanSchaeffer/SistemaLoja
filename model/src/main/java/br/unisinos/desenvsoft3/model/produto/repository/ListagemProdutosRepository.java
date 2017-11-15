@@ -1,4 +1,4 @@
-package br.unisinos.desenvsoft3.model.produto.dao;
+package br.unisinos.desenvsoft3.model.produto.repository;
 
 import java.util.List;
 
@@ -7,12 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import br.unisinos.desenvsoft3.model.generic.dao.DataAccessManager;
 import br.unisinos.desenvsoft3.model.generic.util.HQLBuilder;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoFilter;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoListado;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoView;
 
 @Repository
-public class ListagemProdutosDAO {
+public class ListagemProdutosRepository {
 
 	@Autowired
 	private DataAccessManager dataAccessManager;
@@ -27,6 +24,7 @@ public class ListagemProdutosDAO {
 				.append(" FROM Produto prod ")
 				.append(" WHERE 1=1 ")
 				.appendNullable(" AND prod.nome LIKE :nome ", filtro.getNomeFilterWithWildcards())
+				.appendOnCondition(" AND prod.estoque > 0 ", Boolean.TRUE.equals(filtro.getSomenteComEstoque()))
 				.append(" ORDER BY prod.nome ");
 		
 		return dataAccessManager.query(hql.toString())
