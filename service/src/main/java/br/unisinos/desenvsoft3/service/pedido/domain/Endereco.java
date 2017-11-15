@@ -4,11 +4,11 @@ public class Endereco {
 
 	private String txEndereco;
 
+	public Endereco(String txEndereco) {
+		this.txEndereco = txEndereco;
+	}
+	
 	public String getTxEndereco() {
 		return txEndereco;
-	}
-
-	public void setTxEndereco(String txEndereco) {
-		this.txEndereco = txEndereco;
 	}
 }

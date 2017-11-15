@@ -45,12 +45,11 @@ public class CarrinhoDeComprasService {
 			carrinho.setUsuario(usuarioDAO.carregar(idUsuario));
 		}
 		
-		if(carrinho.getItens().stream().filter(item -> item.getProduto().getId().equals(idProduto)).count() == 0) {
+		if(!carrinho.possuiProduto(idProduto)) {
 			CarrinhoDeComprasItem item = new CarrinhoDeComprasItem();
-			item.setCarrinhoDeCompras(carrinho);
 			item.setProduto(produto);
 			item.setQuantidade(1);
-			carrinho.getItens().add(item);
+			carrinho.addItem(item);
 			
 			carrinhoDeComprasDAO.save(carrinho);
 		}
@@ -67,7 +66,7 @@ public class CarrinhoDeComprasService {
 		
 		CarrinhoDeCompras carrinho = carrinhoDeComprasDAO.getByUsuario(idUsuario);
 		if(carrinho != null) {
-			carrinho.getItens().removeIf(item -> item.getProduto().getId().equals(idProduto));
+			carrinho.removerProduto(idProduto);
 			
 			if(carrinho.getItens().isEmpty()) {
 				carrinhoDeComprasDAO.delete(carrinho);
@@ -86,7 +85,7 @@ public class CarrinhoDeComprasService {
 		
 		CarrinhoDeCompras carrinho = carrinhoDeComprasDAO.getByUsuario(idUsuario);
 		if(carrinho != null) {
-			CarrinhoDeComprasItem item = carrinho.getItens().stream().filter(i -> i.getProduto().getId().equals(idProduto)).findAny().orElse(null);
+			CarrinhoDeComprasItem item = carrinho.getItemByProduto(idProduto);
 			
 			if(item != null) {
 				item.setQuantidade(quantidade);

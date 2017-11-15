@@ -57,4 +57,27 @@ public class CarrinhoDeCompras {
 	public Integer getId() {
 		return id;
 	}
+	
+	public CarrinhoDeComprasItem getItemByProduto(Integer idProduto) {
+		return getItens().stream()
+						 .filter(item -> item.getProduto().getId().equals(idProduto))
+						 .findAny()
+						 .orElse(null);
+	}
+	
+	public boolean possuiProduto(Integer idProduto) {
+		return getItens().stream()
+				 .filter(item -> item.getProduto().getId().equals(idProduto))
+				 .findAny()
+				 .isPresent();
+	}
+	
+	public void addItem(CarrinhoDeComprasItem item) {
+		itens.add(item);
+		item.setCarrinhoDeCompras(this);
+	}
+	
+	public void removerProduto(Integer idProduto) {
+		itens.removeIf(item -> item.getProduto().getId().equals(idProduto));
+	}
 }

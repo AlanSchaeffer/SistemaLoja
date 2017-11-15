@@ -95,7 +95,7 @@ public class Pedido {
 	}
 	
 	public void addItem(PedidoItem item) {
-		getItens().add(item);
+		itens.add(item);
 		item.setPedido(this);
 	}
 
