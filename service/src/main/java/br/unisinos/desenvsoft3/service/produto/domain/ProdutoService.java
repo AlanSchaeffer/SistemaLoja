@@ -6,12 +6,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.unisinos.desenvsoft3.model.produto.dao.ListagemProdutosDAO;
 import br.unisinos.desenvsoft3.model.produto.dao.ProdutoDAO;
 import br.unisinos.desenvsoft3.model.produto.domain.Produto;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoFilter;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoListado;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoView;
+import br.unisinos.desenvsoft3.model.produto.repository.ListagemProdutosRepository;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoFilter;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoListado;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoView;
 import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
 import br.unisinos.desenvsoft3.service.generic.util.ValidationContext;
 
@@ -22,7 +22,7 @@ public class ProdutoService {
 	private ProdutoDAO produtoDAO;
 	
 	@Autowired
-	private ListagemProdutosDAO listagemProdutosDAO;
+	private ListagemProdutosRepository listagemProdutosRepository;
 	
 	public GenericResponse salvar(CadastroProdutoRequest request) {
 		return ValidationContext.forBean(request)
@@ -51,10 +51,10 @@ public class ProdutoService {
 	}
 	
 	public List<ProdutoListado> listarProdutos(ProdutoFilter filtro) {
-		return listagemProdutosDAO.pesquisar(filtro);
+		return listagemProdutosRepository.pesquisar(filtro);
 	}
 	
 	public ProdutoView visualizar(Integer id) {
-		return listagemProdutosDAO.visualizar(id);
+		return listagemProdutosRepository.visualizar(id);
 	}
 }

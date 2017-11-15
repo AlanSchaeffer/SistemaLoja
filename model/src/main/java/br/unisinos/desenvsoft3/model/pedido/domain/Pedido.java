@@ -1,6 +1,7 @@
 package br.unisinos.desenvsoft3.model.pedido.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,6 +42,10 @@ public class Pedido {
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
+	
+	@NotNull
+	@Column(name = "DT_PEDIDO")
+	private Date dtPedido;
 	
 	@NotNull
 	@Column(name = "VL_FRETE")
@@ -105,5 +110,13 @@ public class Pedido {
 
 	public void setEnderecoEntrega(String enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public Date getDtPedido() {
+		return dtPedido;
+	}
+
+	public void setDtPedido(Date dtPedido) {
+		this.dtPedido = dtPedido;
 	}
 }

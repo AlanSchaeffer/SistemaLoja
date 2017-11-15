@@ -1,5 +1,7 @@
 package br.unisinos.desenvsoft3.service.pedido.domain;
 
+import java.util.Date;
+
 import org.springframework.util.Assert;
 
 import br.unisinos.desenvsoft3.model.pedido.domain.CarrinhoDeCompras;
@@ -38,6 +40,7 @@ public class PedidoFactory {
 		pedido.setUsuario(carrinhoDeCompras.getUsuario());
 		pedido.setVlFrete(freteService.getVlFreteParaEndereco(endereco));
 		pedido.setEnderecoEntrega(endereco.getTxEndereco());
+		pedido.setDtPedido(new Date());
 		
 		carrinhoDeCompras.getItens()
 						 .stream()

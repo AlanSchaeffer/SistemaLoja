@@ -2,7 +2,7 @@ package br.unisinos.desenvsoft3.service.produto.domain;
 
 import java.util.List;
 
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoListado;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoListado;
 
 public class ListaDeProdutosResponse {
 

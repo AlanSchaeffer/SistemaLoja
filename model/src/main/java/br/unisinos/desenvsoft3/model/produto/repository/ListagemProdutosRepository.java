@@ -1,4 +1,4 @@
-package br.unisinos.desenvsoft3.model.produto.dao;
+package br.unisinos.desenvsoft3.model.produto.repository;
 
 import java.util.List;
 
@@ -7,12 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import br.unisinos.desenvsoft3.model.generic.dao.DataAccessManager;
 import br.unisinos.desenvsoft3.model.generic.util.HQLBuilder;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoFilter;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoListado;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoView;
 
 @Repository
-public class ListagemProdutosDAO {
+public class ListagemProdutosRepository {
 
 	@Autowired
 	private DataAccessManager dataAccessManager;

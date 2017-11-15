@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoFilter;
-import br.unisinos.desenvsoft3.model.produto.domain.ProdutoView;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoFilter;
+import br.unisinos.desenvsoft3.model.produto.repository.ProdutoView;
 import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
 import br.unisinos.desenvsoft3.service.produto.domain.CadastroProdutoRequest;
 import br.unisinos.desenvsoft3.service.produto.domain.ListaDeProdutosResponse;

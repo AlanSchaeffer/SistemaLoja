@@ -1,4 +1,4 @@
-package br.unisinos.desenvsoft3.model.produto.domain;
+package br.unisinos.desenvsoft3.model.produto.repository;
 
 public class ProdutoFilter {
 

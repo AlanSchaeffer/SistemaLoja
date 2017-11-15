@@ -1,12 +1,11 @@
-package br.unisinos.desenvsoft3.model.produto.domain;
+package br.unisinos.desenvsoft3.model.produto.repository;
 
-public class ProdutoView {
+public class ProdutoListado {
 
 	private Integer id;
 	private String nome;
-	private String descricao;
 	private Double preco;
-	private Integer estoque;
+	private boolean temEstoque;
 
 	public Integer getId() {
 		return id;
@@ -24,14 +23,6 @@ public class ProdutoView {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public Double getPreco() {
 		return preco;
 	}
@@ -40,11 +31,11 @@ public class ProdutoView {
 		this.preco = preco;
 	}
 
-	public Integer getEstoque() {
-		return estoque;
+	public boolean isTemEstoque() {
+		return temEstoque;
 	}
 
-	public void setEstoque(Integer estoque) {
-		this.estoque = estoque;
+	public void setTemEstoque(boolean temEstoque) {
+		this.temEstoque = temEstoque;
 	}
 }
