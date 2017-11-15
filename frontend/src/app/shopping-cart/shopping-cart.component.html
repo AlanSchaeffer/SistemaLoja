@@ -11,6 +11,8 @@
     </table>
   </div>
   <div>
-    Total: R$ {{totalCart}} <button (click)="confirmOrder()">Confirmar Pedido!</button>
+    Total: R$ {{totalCart}} <br />
+    Endereço: <input type="text" [(ngModel)]="endereco" />
+    <button (click)="confirmOrder()">Confirmar Pedido!</button>
   </div>
 </div>

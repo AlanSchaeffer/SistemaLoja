@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Product } from './product';
 import { Order } from './order';
 import { OrderItem } from './order-item';
+import { UserService } from './user.service';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class CartService {
-  constructor() {
+  private urlAddItem: string = "http://localhost:8080/services/carrinho/add";
+  private urlUpdateItemQuantity: string = "http://localhost:8080/services/carrinho/alterarQuantidade";
+  private urlRemoveItem: string = "http://localhost:8080/services/carrinho/remove";
+
+  constructor(private http: Http, private userService: UserService) {
     if (localStorage.getItem('order') == null ||
       localStorage.getItem('order') == undefined) {
         let order:Order = {
@@ -17,29 +24,49 @@ export class CartService {
       }
   }
 
-  mergeItemToCart(product: Product): boolean {
+  mergeItemToCart(product: Product) {
+    let updateQuantity: boolean = false;
     var order = this.getOrder();
     var orderItem = new OrderItem();
     orderItem.product = product;
     orderItem.quantity = product.quantity_buy;
-    
-    if (product.quantity_buy > product.quantity) {
-      return false;
-    }
-
+        
     if (this.orderContainsProduct(order, product)) 
     {
-      order = this.removeItemFromOrder(order, product);
+      updateQuantity = true;
     }
 
-    order.orderItems.push(orderItem);    
-    this.setOrder(order);
-    return true;
+    return this.http
+      .post((updateQuantity ? this.urlUpdateItemQuantity : this.urlAddItem) + "/" 
+            + orderItem.product.id + "/"
+            + orderItem.quantity, null,
+            this.userService.getHeaders())
+      .map((response) => {
+        if (response.ok === true){
+          if (updateQuantity){
+            order = this.removeItemFromOrder(order, product);
+          }
+          order.orderItems.push(orderItem);    
+          this.setOrder(order);
+          return true
+        }
+        return false;
+      });
   }
   
   removeItemFromCart(product: Product){
-    var order = this.removeItemFromOrder(this.getOrder(), product);
-    this.setOrder(order);
+    return this.http
+      .post(this.urlRemoveItem + "/" + product.id, null, this.userService.getHeaders())
+      .map(response => {
+        if (response.ok === true){
+          var order = this.removeItemFromOrder(this.getOrder(), product);
+          this.setOrder(order);
+          product.quantity_buy = 0;
+          return true;
+        } else {
+          return false;    
+        }
+      });    
   }
 
   removeItemFromOrder(order: Order, product: Product): Order{

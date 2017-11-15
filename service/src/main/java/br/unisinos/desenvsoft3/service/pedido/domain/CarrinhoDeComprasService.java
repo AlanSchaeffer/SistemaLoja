@@ -33,7 +33,7 @@ public class CarrinhoDeComprasService {
 		}
 	}
 
-	public GenericResponse adicionarAoCarrinhoDeCompras(Integer idProduto, Integer idUsuario) {
+	public GenericResponse adicionarAoCarrinhoDeCompras(Integer idProduto, Integer idUsuario, Integer quantidade) {
 		Produto produto = produtoDAO.carregar(idProduto);
 		if(produto == null) {
 			return GenericResponse.error("Produto inválido.");
@@ -48,7 +48,7 @@ public class CarrinhoDeComprasService {
 		if(!carrinho.possuiProduto(idProduto)) {
 			CarrinhoDeComprasItem item = new CarrinhoDeComprasItem();
 			item.setProduto(produto);
-			item.setQuantidade(1);
+			item.setQuantidade(quantidade);
 			carrinho.addItem(item);
 			
 			carrinhoDeComprasDAO.save(carrinho);

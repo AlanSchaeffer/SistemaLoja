@@ -1,3 +1,13 @@
-<p>
-  customer-orders works!
-</p>
+<div style="width: 60%; margin:0 auto;">
+  <table>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>Código do pedido: {{order.id}}</td>
+        <td>Valor total: R$ {{order.valorTotal}}</td>
+        <td>Quantidade de itens: {{order.qtdeItens}}</td>
+        <td *ngIf="order.nmUsuario != null">Cliente: {{order.nmUsuario}}</td>
+        <td>Data: {{order.dtPedido}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

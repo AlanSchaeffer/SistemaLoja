@@ -64,6 +64,10 @@ import { CustomerOrdersComponent } from './customer-orders/customer-orders.compo
         component: CustomerHomeComponent
       },
       {
+        path: 'customer-orders',
+        component: CustomerOrdersComponent
+      },
+      {
         path: 'shopping-cart',
         component: ShoppingCartComponent
       },
@@ -82,6 +86,10 @@ import { CustomerOrdersComponent } from './customer-orders/customer-orders.compo
       {
         path: 'admin/products/:id',
         component: EditProductComponent
+      },
+      {
+        path: 'admin/orders',
+        component: CustomerOrdersComponent
       }
     ])
   ],
