@@ -1,5 +1,29 @@
 <div>
-  <p>
-    <a href="#">Adicionar produtos ao carrinho</a>
-  </p>
+  <div *ngIf="loading; else productsLoaded">
+    Carregando produtos...
+  </div>
+  <ng-template #productsLoaded>
+    <div *ngIf="products.length > 0; else noProducts" style="width: 40%;margin: 0 auto;">
+      <table>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{product.id}}</td>
+            <td>{{product.name}} R${{product.price}}</td>
+            <td>Quantidade:</td>
+            <td><input type="number" [(ngModel)]="product.quantity_buy" /></td>
+            <td><button (click)="addToCart(product)">Adicionar ao Carrinho</button></td>
+            <td><button (click)="removeFromCart(product)">Remover do Carrinho</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      Total: R$ {{totalCart}} <a href="/shopping-cart">Ir para o carrinho</a>
+    </div>
+    <ng-template #noProducts>
+      <div>
+        <h3>Nenhum produto encontrado</h3>
+      </div>
+    </ng-template>
+  </ng-template>
 </div>

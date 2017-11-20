@@ -19,6 +19,7 @@ public class ListagemProdutosRepository {
 				.append(" SELECT prod.id as id ")
 				.append("		,prod.nome as nome ")
 				.append("		,prod.preco as preco ")
+				.append("		,prod.estoque as estoque ")
 				.append("		,(CASE WHEN prod.estoque = 0 THEN false ELSE true END) as temEstoque ")
 				.append(" FROM Produto prod ")
 				.append(" WHERE 1=1 ")

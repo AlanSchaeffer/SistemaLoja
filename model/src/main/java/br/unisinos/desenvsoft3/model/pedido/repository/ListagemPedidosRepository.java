@@ -23,6 +23,7 @@ public class ListagemPedidosRepository {
 				.append(" FROM Pedido pedi ")
 				.append(" INNER JOIN pedi.itens item ")
 				.append(" WHERE pedi.usuario.id = :idUsuario ", idUsuario)
+				.append(" GROUP BY pedi.id, pedi.dtPedido, item.id, item.valor ")
 				.append(" ORDER BY pedi.dtPedido DESC ");
 		return dataAccessManager.query(hql.toString())
 								.namedParameters(hql.namedParameters())
@@ -40,6 +41,7 @@ public class ListagemPedidosRepository {
 				.append(" INNER JOIN pedi.itens item ")
 				.append(" INNER JOIN pedi.usuario usua ")
 				.append(" WHERE pedi.statusPedido IN ('C','F') ")
+				.append(" GROUP BY pedi.id, pedi.dtPedido, item.id, item.valor, usua.nome ")
 				.append(" ORDER BY pedi.dtPedido DESC ");
 		return dataAccessManager.query(hql.toString())
 								.find(PedidoListadoAdminView.class);

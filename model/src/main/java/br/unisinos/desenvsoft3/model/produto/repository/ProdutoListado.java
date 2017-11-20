@@ -6,6 +6,7 @@ public class ProdutoListado {
 	private String nome;
 	private Double preco;
 	private boolean temEstoque;
+	private Integer estoque;
 
 	public Integer getId() {
 		return id;
@@ -37,5 +38,13 @@ public class ProdutoListado {
 
 	public void setTemEstoque(boolean temEstoque) {
 		this.temEstoque = temEstoque;
+	}
+	
+	public Integer getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Integer estoque) {
+		this.estoque = estoque;
 	}
 }

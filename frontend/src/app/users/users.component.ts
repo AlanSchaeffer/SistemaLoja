@@ -28,6 +28,6 @@ export class UsersComponent implements OnInit {
       } else {
         alert("Erro ao cadastrar usuário: " + result.message);
       }
-    });
+    }, error => { alert("Ocorreu um erro ao cadastrar o usuário, tente novamente mais tarde") });
   }
 }
