@@ -119,4 +119,8 @@ public class Pedido {
 	public void setDtPedido(Date dtPedido) {
 		this.dtPedido = dtPedido;
 	}
+	
+	public boolean podeCancelar() {
+		return statusPedido == StatusPedido.CRIADO;
+	}
 }

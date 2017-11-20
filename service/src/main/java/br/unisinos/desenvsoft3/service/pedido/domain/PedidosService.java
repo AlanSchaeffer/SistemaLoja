@@ -10,9 +10,11 @@ import br.unisinos.desenvsoft3.model.pedido.dao.CarrinhoDeComprasDAO;
 import br.unisinos.desenvsoft3.model.pedido.dao.PedidoDAO;
 import br.unisinos.desenvsoft3.model.pedido.domain.CarrinhoDeCompras;
 import br.unisinos.desenvsoft3.model.pedido.domain.Pedido;
+import br.unisinos.desenvsoft3.model.pedido.domain.StatusPedido;
 import br.unisinos.desenvsoft3.model.pedido.repository.ListagemPedidosRepository;
-import br.unisinos.desenvsoft3.model.pedido.repository.PedidoListadoAdminView;
 import br.unisinos.desenvsoft3.model.pedido.repository.PedidoListadoView;
+import br.unisinos.desenvsoft3.model.pedido.repository.PedidoView;
+import br.unisinos.desenvsoft3.model.pedido.repository.ViewPedidoRepository;
 import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
 import br.unisinos.desenvsoft3.service.produto.domain.ValorProdutoService;
 
@@ -34,14 +36,17 @@ public class PedidosService {
 	@Autowired
 	private ListagemPedidosRepository listagemPedidosRepository;
 	
+	@Autowired
+	private ViewPedidoRepository viewPedidoRepository;
+	
 	public GenericResponse realizarPedidoComCarrinhoDeCompras(Endereco endereco, Integer idUsuario) {
 		if(StringUtils.isBlank(endereco.getTxEndereco())) {
-			return GenericResponse.error("Endereço deve estar preenchido.");
+			return GenericResponse.error("Endereï¿½o deve estar preenchido.");
 		}
 		
 		CarrinhoDeCompras carrinhoDeCompras = carrinhoDeComprasDAO.getByUsuario(idUsuario);
 		if(carrinhoDeCompras.getItens().isEmpty()) {
-			return GenericResponse.error("Carrinho está vazio.");
+			return GenericResponse.error("Carrinho estï¿½ vazio.");
 		}
 		
 		Pedido pedido = new PedidoFactory().endereco(endereco)
@@ -58,8 +63,28 @@ public class PedidosService {
 	public List<PedidoListadoView> getPedidosByUsuario(Integer idUsuario) {
 		return listagemPedidosRepository.listarPedidosUsuario(idUsuario);
 	}
+
+	public PedidoView getPedido(Integer idPedido, Integer idUsuario) {
+		PedidoView pedido = viewPedidoRepository.getPedidoUsuario(idPedido, idUsuario);
+		
+		if(!pedido.existe()) {
+			throw new IllegalArgumentException("Pedido inexistente.");
+		}
+		
+		return pedido;
+	}
 	
-	public List<PedidoListadoAdminView> getTodosPedidosAbertos() {
-		return listagemPedidosRepository.listarPedidosAbertosParaAdministrador();
+	public GenericResponse cancelarPedido(Integer idPedido, Integer idUsuario) {
+		Pedido pedido = pedidoDAO.getAutorizado(idPedido, idUsuario);
+		if(pedido == null) {
+			return GenericResponse.error("Pedido inexistente.");
+		} else if(!pedido.podeCancelar()) {
+			return GenericResponse.error("Pedido nÃ£o pode ser cancelado pois seu status Ã© " + pedido.getStatusPedido().toString());
+		}
+		
+		pedido.setStatusPedido(StatusPedido.CANCELADO);
+		pedidoDAO.salvar(pedido);
+		
+		return GenericResponse.ok();
 	}
 }
