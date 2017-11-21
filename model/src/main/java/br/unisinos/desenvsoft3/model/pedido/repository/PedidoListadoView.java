@@ -3,9 +3,13 @@ package br.unisinos.desenvsoft3.model.pedido.repository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.unisinos.desenvsoft3.model.pedido.domain.StatusPedido;
+
 public class PedidoListadoView {
 
 	private Integer id;
+	private String cdStatus;
+	private String descStatus;
 	private Double valorTotal;
 	private Integer qtdeItens;
 	private String dtPedido;
@@ -44,5 +48,18 @@ public class PedidoListadoView {
 		} else {
 			this.dtPedido = new SimpleDateFormat("dd/MM/yyyy").format(dtPedidoAsDate);
 		}
+	}
+
+	public String getCdStatus() {
+		return cdStatus;
+	}
+
+	public String getDescStatus() {
+		return descStatus;
+	}
+	
+	public void setCdStatus(StatusPedido status) {
+		cdStatus = status.getValue();
+		descStatus = status.toString();
 	}
 }

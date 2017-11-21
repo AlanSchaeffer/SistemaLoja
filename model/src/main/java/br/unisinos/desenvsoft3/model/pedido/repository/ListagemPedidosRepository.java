@@ -17,6 +17,7 @@ public class ListagemPedidosRepository {
 	public List<PedidoListadoView> listarPedidosUsuario(Integer idUsuario) {
 		HQLBuilder hql = new HQLBuilder()
 				.append(" SELECT pedi.id as id ")
+				.append("		,pedi.statusPedido as cdStatus ")
 				.append("		,SUM(item.valor) as valorTotal ")
 				.append("		,CAST(COUNT(item.id) as int) as qtdeItens ")
 				.append("		,pedi.dtPedido as dtPedido ")
@@ -33,6 +34,7 @@ public class ListagemPedidosRepository {
 	public List<PedidoListadoAdminView> listarPedidosAbertosParaAdministrador() {
 		HQLBuilder hql = new HQLBuilder()
 				.append(" SELECT pedi.id as id ")
+				.append("		,pedi.statusPedido as cdStatus ")
 				.append("		,SUM(item.valor) as valorTotal ")
 				.append("		,CAST(COUNT(item.id) as int) as qtdeItens ")
 				.append("		,pedi.dtPedido as dtPedido ")

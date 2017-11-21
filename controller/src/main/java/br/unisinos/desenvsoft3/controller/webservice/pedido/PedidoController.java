@@ -53,7 +53,7 @@ public class PedidoController {
 		}
 	}
 	
-	@GetMapping("/${idPedido}")
+	@GetMapping("/{idPedido}")
 	public PedidoView getPedido(@PathVariable("idPedido") Integer idPedido) {
 		if(usuarioBean.isUsuarioAdmin()) {
 			return pedidosAdminService.getPedido(idPedido);
@@ -63,7 +63,7 @@ public class PedidoController {
 	}
 	
 
-	@GetMapping("/cancelar/${idPedido}")
+	@GetMapping("/cancelar/{idPedido}")
 	public GenericResponse cancelarPedido(@PathVariable("idPedido") Integer idPedido) {
 		if(usuarioBean.isUsuarioAdmin()) {
 			return pedidosAdminService.cancelarPedido(idPedido);
@@ -72,7 +72,7 @@ public class PedidoController {
 		}
 	}
 	
-	@GetMapping("/alterarStatus/${idPedido}/${novoStatus}")
+	@GetMapping("/alterarStatus/{idPedido}/{novoStatus}")
 	public GenericResponse alterarStatus(@PathVariable("idPedido") Integer idPedido, @PathVariable("novoStatus") String novoStatus) {
 		return pedidosAdminService.alterarStatus(idPedido, novoStatus);
 	}
