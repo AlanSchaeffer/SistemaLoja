@@ -1,13 +1,7 @@
 package br.unisinos.desenvsoft3.security;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -20,18 +14,18 @@ public class JWTBean {
 	}
 	
 	private Integer idUsuario;
-	private String role;
 	private String user;
+	private String token;
 	
 	private JWTBean() {
 	}
 	
 	public JWTBean(String token, String secret, String tokenPrefix) {
+		this.token = token;
 		Jws<Claims> jws = Jwts.parser()
 							  .setSigningKey(secret)
 							  .parseClaimsJws(token.replace(tokenPrefix, ""));
 		user = jws.getBody().getSubject();
-		role = jws.getBody().get("role", String.class);
 		idUsuario = jws.getBody().get("idUsuario", Integer.class);
 	}
 	
@@ -39,24 +33,19 @@ public class JWTBean {
 		return idUsuario;
 	}
 	
-	public String getRole() {
-		return role;
-	}
-	
 	public String getUser() {
 		return user;
 	}
 	
-	public Authentication getAuthentication() {
-		return user != null ? new UsernamePasswordAuthenticationToken(user, null, buildRolesList(role)) : null;
+	public String getToken() {
+		return token;
 	}
 	
-	private List<GrantedAuthority> buildRolesList(String role) {
-		if(role == null) {
-			return Collections.emptyList();
-		} else {
-			SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
-			return Arrays.asList(authority);
-		}
+	public Authentication getAuthentication(JWTLoginHelperService jwtLoginHelperService) {
+		return user != null ? new UsernamePasswordAuthenticationToken(user, null, jwtLoginHelperService.buildRolesListForLoginToken(token)) : null;
+	}
+	
+	public void preencheUsuarioBean(JWTLoginHelperService jwtLoginHelperService) {
+		jwtLoginHelperService.preencheUsuarioBean(token);
 	}
 }

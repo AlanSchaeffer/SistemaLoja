@@ -61,7 +61,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	private void validaAdministrador(LoginRequest creds) {
 		if(obrigaAdministrador) {
 			if(!jwtLoginHelperService.isUsuarioAdministrador(creds.getUsernameOrEmail())) {
-				throw new RuntimeException("Usuário inválido.");
+				throw new RuntimeException("Usuï¿½rio invï¿½lido.");
 			}
 		}
 	}
@@ -75,6 +75,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 			role = auth.getAuthorities().iterator().next().getAuthority();
 		}
 		
-		TokenAuthenticationService.addAuthentication(res, auth.getName(), role, idUsuario);
+		String token = TokenAuthenticationService.addAuthentication(res, auth.getName());
+		jwtLoginHelperService.registrarSessao(token, idUsuario, role);
 	}
 }

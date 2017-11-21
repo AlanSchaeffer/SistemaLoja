@@ -12,23 +12,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
-import br.unisinos.desenvsoft3.sistema.login.UsuarioBean;
-
 public class JWTAuthenticationFilter extends GenericFilterBean {
 
-	private UsuarioBean usuarioBean;
+	private JWTLoginHelperService jwtLoginHelperService;
 	
-	public JWTAuthenticationFilter(UsuarioBean usuarioBean) {
-		this.usuarioBean = usuarioBean;
+	public JWTAuthenticationFilter(JWTLoginHelperService jwtLoginHelperService) {
+		this.jwtLoginHelperService = jwtLoginHelperService;
 	}
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		JWTBean jwtBean = TokenAuthenticationService.getAuthentication((HttpServletRequest) request);
-		Authentication authentication = jwtBean.getAuthentication();
-		usuarioBean.setIdUsuario(jwtBean.getIdUsuario());
-		usuarioBean.setUsuarioAdmin("ROLE_ADMIN".equals(jwtBean.getRole()));
+		Authentication authentication = jwtBean.getAuthentication(jwtLoginHelperService);
+		jwtBean.preencheUsuarioBean(jwtLoginHelperService);
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		filterChain.doFilter(request, response);

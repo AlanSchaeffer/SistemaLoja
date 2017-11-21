@@ -14,14 +14,13 @@ class TokenAuthenticationService {
 	static final String TOKEN_PREFIX = "Rasputin";
 	static final String HEADER_STRING = "Authorization";
 
-	static void addAuthentication(HttpServletResponse res, String username, String role, Integer idUsuario) {
+	static String addAuthentication(HttpServletResponse res, String username) {
 		String JWT = Jwts.builder()
 						 .setSubject(username)
-						 .claim("role", role)
-						 .claim("idUsuario", idUsuario)
 						 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
 						 .signWith(SignatureAlgorithm.HS512, SECRET).compact();
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
+		return TOKEN_PREFIX + " " + JWT;
 	}
 
 	static JWTBean getAuthentication(HttpServletRequest request) {
