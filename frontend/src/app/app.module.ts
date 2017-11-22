@@ -22,6 +22,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CustomerOrdersComponent } from './customer-orders/customer-orders.compo
     EditProductComponent,
     CustomerHomeComponent,
     ShoppingCartComponent,
-    CustomerOrdersComponent
+    CustomerOrdersComponent,
+    OrderComponent
   ],
   imports: [
     HttpModule,
@@ -86,6 +88,10 @@ import { CustomerOrdersComponent } from './customer-orders/customer-orders.compo
       {
         path: 'admin/products/:id',
         component: EditProductComponent
+      },
+      {
+        path: 'admin/orders/:id',
+        component: OrderComponent
       },
       {
         path: 'admin/orders',

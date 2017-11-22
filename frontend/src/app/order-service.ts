@@ -8,6 +8,7 @@ import { Http, RequestOptions } from '@angular/http';
 export class OrderService {
   private urlConfirmOrder = "http://localhost:8080/services/pedidos/realizar/";
   private urlGetOrders = "http://localhost:8080/services/pedidos/listar/";
+  private urlGetOrder = "http://localhost:8080/services/pedidos/";
 
   constructor(private userSerivce: UserService, private cartService: CartService, private http: Http){
 
@@ -28,6 +29,14 @@ export class OrderService {
   getOrders() {
     return this.http
       .get(this.urlGetOrders, this.userSerivce.getHeaders())
+      .map(response => {        
+        return response.json().pedidos;
+      });
+  }
+
+  getOrder(id) {
+    return this.http
+      .get(this.urlGetOrder + id, this.userSerivce.getHeaders())
       .map(response => {        
         return response.json().pedidos;
       });

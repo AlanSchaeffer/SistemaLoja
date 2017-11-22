@@ -37,7 +37,7 @@ public class ViewPedidoRepository {
 				.append("		,pedi.enderecoEntrega as enderecoEntrega ")
 				.append("		,usua.nome as nmUsuario ")
 				.append("		,peit.id as idPedidoItem ")
-				.append("		,prod.nmProduto as nmProduto ")
+				.append("		,prod.nome as nmProduto ")
 				.append("		,peit.valor as valor ")
 				.append("		,peit.quantidade as quantidade ")
 				.append(" FROM PedidoItem peit ")

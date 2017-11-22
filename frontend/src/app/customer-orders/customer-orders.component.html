@@ -7,6 +7,8 @@
         <td>Quantidade de itens: {{order.qtdeItens}}</td>
         <td *ngIf="order.nmUsuario != null">Cliente: {{order.nmUsuario}}</td>
         <td>Data: {{order.dtPedido}}</td>
+        <td *ngIf="order.nmUsuario != null"><a href="/admin/orders/{{order.id}}">Alterar Status</a></td>
+        <td *ngIf="order.nmUsuario == null"><a href="#null">Cancelar Pedido</a></td>
       </tr>
     </tbody>
   </table>
