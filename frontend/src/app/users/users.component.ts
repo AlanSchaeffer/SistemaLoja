@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
     this.userService.register(this.user).subscribe(result => {
       if (result.success === true) {
         alert("Usuário cadastrado com sucesso!");
+        localStorage.removeItem('currentUser');
         this.router.navigate(['']);
       } else {
         alert("Erro ao cadastrar usuário: " + result.message);

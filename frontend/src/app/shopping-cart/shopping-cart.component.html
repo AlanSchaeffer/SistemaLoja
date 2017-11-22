@@ -1,4 +1,4 @@
-<div>
+<div class="text-center" style="padding-top: 15px">
   <div *ngIf="order != null && order.orderItems != null && order.orderItems.length > 0" style="width: 40%;margin: 0 auto;">
     <table>
       <tbody>
@@ -11,8 +11,8 @@
     </table>
   </div>
   <div>
-    Total: R$ {{totalCart}} <br />
-    Endereço: <input type="text" [(ngModel)]="endereco" />
-    <button (click)="confirmOrder()">Confirmar Pedido!</button>
+    Endereço: <input type="text" [(ngModel)]="endereco" style="min-width: 285px" />
+    <button (click)="confirmOrder()">Confirmar Pedido!</button><br />
+    <b>Total: R$ {{totalCart}}</b>
   </div>
 </div>

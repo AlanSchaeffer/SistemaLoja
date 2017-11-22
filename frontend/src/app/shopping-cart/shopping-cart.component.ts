@@ -12,12 +12,15 @@ import { Router } from '@angular/router';
 export class ShoppingCartComponent implements OnInit {
   order: Order;
   endereco: string = "";
+  totalCart: number;
+
   constructor(private cartService: CartService,
     private orderService: OrderService,
     private router: Router) { }
 
   ngOnInit() {
     this.order = this.cartService.getOrder();
+    this.totalCart = this.cartService.getTotalValue();
   }
 
   confirmOrder(){
