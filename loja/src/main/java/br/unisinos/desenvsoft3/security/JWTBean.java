@@ -46,6 +46,6 @@ public class JWTBean {
 	}
 	
 	public void preencheUsuarioBean(JWTLoginHelperService jwtLoginHelperService) {
-		jwtLoginHelperService.preencheUsuarioBean(token);
+		if(user != null) jwtLoginHelperService.preencheUsuarioBean(token);
 	}
 }
