@@ -1,3 +1,27 @@
-<p>
-  order works!
-</p>
+<div class="text-center" style="padding-top: 15px">
+  <table style="width:80%; margin: 0 auto" *ngIf="!loading">
+    <tbody>
+      <tr>
+        <td>Código do pedido: {{order.id}}</td>
+        <td>Valor total: R$ {{order.itens[0].valor}}</td>
+        <td>Quantidade de itens: {{order.itens[0].quantidade}}</td>
+        <td>Data: {{order.dtPedido}}</td>
+        <td>Status: {{order.descStatusPedido}}</td>
+        <td>Novo status: 
+          <select [(ngModel)]="newStatus">
+            <option value=""></option>
+            <option value="C">Criado</option>
+            <option value="F">Faturado</option>
+            <option value="E">Enviado</option>
+            <option value="O">Concluído</option>
+            <option value="A">Cancelado</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br /><br />
+  <button (click)="changeStatus()">Salvar</button>
+  <br /><br />
+  <a href="/admin/orders">Voltar</a>
+</div>

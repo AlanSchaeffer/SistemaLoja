@@ -13,6 +13,20 @@ export class CustomerOrdersComponent implements OnInit {
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+    this.loadOrders();
+  }
+
+  cancelOrder(id){
+    this.orderService.cancelOrder(id).subscribe(result => {
+      if (result === true) {
+        alert("Pedido Cancelado Com Sucesso!");
+        this.loading = true;
+        this.loadOrders();
+      }
+    });
+  }
+
+  loadOrders(){
     this.orderService.getOrders().subscribe(result => {
       this.orders = result;
       this.loading = false;
