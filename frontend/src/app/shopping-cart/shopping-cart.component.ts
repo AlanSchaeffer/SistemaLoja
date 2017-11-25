@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class ShoppingCartComponent implements OnInit {
   order: Order;
   endereco: string = "";
-  totalCart: number;
-
+  totalCart: number = 0;
+  
   constructor(private cartService: CartService,
     private orderService: OrderService,
     private router: Router) { }
