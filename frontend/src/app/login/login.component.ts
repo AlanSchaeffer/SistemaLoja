@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user, admin)
       .subscribe(result => {
         if (result === true) {
+          localStorage.removeItem('order');
           if (admin){
             this.router.navigate(['/admin']);
           } else {

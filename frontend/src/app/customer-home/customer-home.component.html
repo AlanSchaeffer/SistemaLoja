@@ -1,10 +1,10 @@
-<div>
+<div class="text-center" style="padding-top: 15px;">
   <div *ngIf="loading; else productsLoaded">
     Carregando produtos...
   </div>
   <ng-template #productsLoaded>
-    <div *ngIf="products.length > 0; else noProducts" style="width: 40%;margin: 0 auto;">
-      <table>
+    <div *ngIf="products.length > 0; else noProducts">
+      <table style="width:80%;margin:0 auto;">
         <tbody>
           <tr *ngFor="let product of products">
             <td>{{product.id}}</td>

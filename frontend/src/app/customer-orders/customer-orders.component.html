@@ -1,5 +1,5 @@
-<div style="width: 60%; margin:0 auto;">
-  <table>
+<div class="text-center" style="padding-top: 15px">
+  <table style="width:80%; margin: 0 auto">
     <tbody>
       <tr *ngFor="let order of orders">
         <td>Código do pedido: {{order.id}}</td>
@@ -7,6 +7,9 @@
         <td>Quantidade de itens: {{order.qtdeItens}}</td>
         <td *ngIf="order.nmUsuario != null">Cliente: {{order.nmUsuario}}</td>
         <td>Data: {{order.dtPedido}}</td>
+        <td>Status: {{order.descStatus}}</td>
+        <td *ngIf="order.nmUsuario != null"><a href="/admin/orders/{{order.id}}">Alterar Status</a></td>
+        <td *ngIf="order.nmUsuario == null && order.descStatus != 'Cancelado'"><a href="javascript:void(0)" (click)="cancelOrder(order.id)">Cancelar Pedido</a></td>
       </tr>
     </tbody>
   </table>

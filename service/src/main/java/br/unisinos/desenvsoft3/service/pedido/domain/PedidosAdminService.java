@@ -27,7 +27,7 @@ public class PedidosAdminService {
 	private PedidoDAO pedidoDAO;
 	
 	public List<PedidoListadoAdminView> getTodosPedidosAbertos() {
-		return listagemPedidosRepository.listarPedidosAbertosParaAdministrador();
+		return listagemPedidosRepository.listarPedidosParaAdministrador();
 	}
 	
 	public PedidoView getPedido(Integer idPedido) {

@@ -28,11 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				   .authorizeRequests()
+				   		.antMatchers("/services/usuario/cadastrar").permitAll()
 				   		.antMatchers("/services/produtos/salvar").hasRole("ADMIN")
 				   		.antMatchers("/services/carrinho/", "/services/carrinho/*", "/services/carrinho/**").authenticated()
 				   		.antMatchers("/services/pedidos/alterarStatus", "/services/pedidos/alterarStatus/**").hasRole("ADMIN")
 				   		.antMatchers("/services/pedidos/**").authenticated()
-				   		.anyRequest().permitAll()
 				   .and()
 				// We filter the api/login requests
 				   .addFilterBefore(new JWTLoginFilter("/services/usuario/login", authenticationManager(), jwtLoginHelperService), UsernamePasswordAuthenticationFilter.class)

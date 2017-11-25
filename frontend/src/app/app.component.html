@@ -1,6 +1,15 @@
-<div style="text-align:center">
-  <h1>
-    {{title}}
-  </h1>
-  <router-outlet></router-outlet>  
+<div id="header" class="text-center" style="cursor: pointer;" (click)="goToHome()">  
+    <h1>
+      {{title}}
+    </h1>
+</div>
+<div id="navigation">
+  <router-outlet></router-outlet>
+</div>
+<div id="contact" class="text-center">
+  <h2>Av. Unisinos, 950 - Cristo Rei, São Leopoldo - RS, 93020-190</h2> <br />
+  <h2>(51) 3591-1122</h2>
+</div>
+<div id="footer" class="text-center">
+  <p>Todos os direitos reservados 2017 @ Unisinos Loja Virtual</p>
 </div>

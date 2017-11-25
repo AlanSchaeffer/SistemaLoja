@@ -13,6 +13,7 @@ export class ShoppingCartComponent implements OnInit {
   order: Order;
   endereco: string = "";
   totalCart: number = 0;
+  
   constructor(private cartService: CartService,
     private orderService: OrderService,
     private router: Router) { }

@@ -25,7 +25,11 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 			throws IOException, ServletException {
 		JWTBean jwtBean = TokenAuthenticationService.getAuthentication((HttpServletRequest) request);
 		Authentication authentication = jwtBean.getAuthentication(jwtLoginHelperService);
-		jwtBean.preencheUsuarioBean(jwtLoginHelperService);
+		
+		try {
+			jwtBean.preencheUsuarioBean(jwtLoginHelperService);
+		} catch (Exception ex) {}
+		
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		filterChain.doFilter(request, response);

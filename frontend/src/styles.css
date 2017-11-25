@@ -1,5 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
 .login {
-    width: 60%;
-    margin: 0 auto;
+    padding-top: 20px;
+}
+
+#header, #contact, #footer {
+    color: white;
+}
+
+#header {
+    padding-top:20px;
+    background: #064470;
+    height: 75px;
+}
+
+#contact {
+    padding-top: 15px;
+    background: #1381ce;
+    height: 100px;
+}
+
+#navigation {
+    background: white;
+    min-height: 300px;
+}
+
+#footer {
+    padding-top: 15px;
+    background: #064470;
+}
+
+body, h1, h2, p {
+    margin: 0;
+}
+
+body {
+    background: #064470;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.login label {
+    height: 100%;
+}
+
+input, button, textarea {
+    padding: 10px;
+    margin-bottom: 10px;
 }
