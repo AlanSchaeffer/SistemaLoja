@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.unisinos.desenvsoft3.model.pedido.repository.ListaDePedidos;
 import br.unisinos.desenvsoft3.model.pedido.repository.PedidoView;
 import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
 import br.unisinos.desenvsoft3.service.pedido.domain.Endereco;
+import br.unisinos.desenvsoft3.service.pedido.domain.ListaDePedidosResponse;
 import br.unisinos.desenvsoft3.service.pedido.domain.PedidosAdminService;
 import br.unisinos.desenvsoft3.service.pedido.domain.PedidosService;
 import br.unisinos.desenvsoft3.service.pedido.domain.RealizaPedidoRequest;
@@ -45,11 +45,11 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/listar")
-	public ListaDePedidos listar() {
+	public ListaDePedidosResponse listar() {
 		if(usuarioBean.isUsuarioAdmin()) {
-			return new ListaDePedidos(new ArrayList<>(pedidosAdminService.getTodosPedidosAbertos()));
+			return new ListaDePedidosResponse(new ArrayList<>(pedidosAdminService.getTodosPedidosAbertos()));
 		} else {
-			return new ListaDePedidos(pedidosService.getPedidosByUsuario(usuarioBean.getIdUsuario()));
+			return new ListaDePedidosResponse(pedidosService.getPedidosByUsuario(usuarioBean.getIdUsuario()));
 		}
 	}
 	
