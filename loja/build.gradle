@@ -23,9 +23,8 @@ dependencies {
 
 }
 
-task copy(type: Copy) {
-    from '../frontend/src'
-    into 'build/resources/public'
+processResources {
+    from ('public') {
+        into 'public'
+    }
 }
-
-assemble.dependsOn copy
