@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import br.unisinos.desenvsoft3.service.promocao.domain.PromocaoService;
 
 @Transactional
 @RestController
-@RequestMapping("/promocao")
+@RequestMapping("/services/promocao")
 public class PromocaoController {
 
 	@Autowired
@@ -33,7 +34,7 @@ public class PromocaoController {
 	}
 	
 	@GetMapping("/remover/{idPromocao}")
-	public void removerPromocao() {
-		
+	public GenericResponse removerPromocao(@PathVariable("idPromocao") Integer idPromocao) {
+		return promocaoService.removerPromocao(idPromocao);
 	}
 }

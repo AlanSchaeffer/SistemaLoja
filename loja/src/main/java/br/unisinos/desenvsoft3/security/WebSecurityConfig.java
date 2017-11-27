@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				   		.antMatchers("/services/produtos/salvar").hasRole("ADMIN")
 				   		.antMatchers("/services/carrinho/", "/services/carrinho/*", "/services/carrinho/**").authenticated()
 				   		.antMatchers("/services/pedidos/alterarStatus", "/services/pedidos/alterarStatus/**").hasRole("ADMIN")
+				   		.antMatchers("/services/promocao", "/services/promocao/**").hasRole("ADMIN")
 				   		.antMatchers("/services/pedidos/**").authenticated()
 				   .and()
 				// We filter the api/login requests

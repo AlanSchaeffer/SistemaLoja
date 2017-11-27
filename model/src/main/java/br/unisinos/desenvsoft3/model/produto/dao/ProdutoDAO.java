@@ -35,7 +35,7 @@ public class ProdutoDAO {
 		HQLBuilder hql = new HQLBuilder()
 				.append(" SELECT COUNT(*) ")
 				.append(" FROM Produto prod ")
-				.append(" WHERE prod.id IN :idsProdutos ", idsProdutos);
+				.append(" WHERE prod.id IN (:idsProdutos) ", idsProdutos);
 		
 		Number resultado = dataAccessManager.query(hql.toString()).namedParameters(hql.namedParameters()).uniqueResult();
 		return resultado.intValue() == idsProdutos.size();

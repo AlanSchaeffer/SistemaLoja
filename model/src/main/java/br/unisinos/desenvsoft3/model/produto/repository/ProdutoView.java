@@ -6,6 +6,7 @@ public class ProdutoView {
 	private String nome;
 	private String descricao;
 	private Double preco;
+	private Double precoCheio;
 	private Integer estoque;
 
 	public Integer getId() {
@@ -46,5 +47,13 @@ public class ProdutoView {
 
 	public void setEstoque(Integer estoque) {
 		this.estoque = estoque;
+	}
+
+	public Double getPrecoCheio() {
+		return precoCheio;
+	}
+
+	public void setPrecoCheio(Double precoCheio) {
+		this.precoCheio = precoCheio;
 	}
 }

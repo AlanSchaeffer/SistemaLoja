@@ -24,14 +24,17 @@ public class ProdutoService {
 	@Autowired
 	private ListagemProdutosRepository listagemProdutosRepository;
 	
+	@Autowired
+	private ValorProdutoService valorProdutoService;
+	
 	public GenericResponse salvar(CadastroProdutoRequest request) {
 		return ValidationContext.forBean(request)
-								.ifValid(r -> r.getNome() != null, "Nome obrigatório")
-								.ifValid(r -> StringUtils.isNotBlank(r.getDescricao()), "Descrição obrigatória")
-								.ifValid(r -> r.getEstoque() != null, "Estoque obrigatório")
-								.ifValid(r -> r.getEstoque() >= 0, "Estoque não pode ser negativo")
-								.ifValid(r -> r.getPreco() != null, "Preço obrigatório")
-								.ifValid(r -> r.getPreco() >= 0.0, "Preço não pode ser negativo")
+								.ifValid(r -> r.getNome() != null, "Nome obrigatï¿½rio")
+								.ifValid(r -> StringUtils.isNotBlank(r.getDescricao()), "Descriï¿½ï¿½o obrigatï¿½ria")
+								.ifValid(r -> r.getEstoque() != null, "Estoque obrigatï¿½rio")
+								.ifValid(r -> r.getEstoque() >= 0, "Estoque nï¿½o pode ser negativo")
+								.ifValid(r -> r.getPreco() != null, "Preï¿½o obrigatï¿½rio")
+								.ifValid(r -> r.getPreco() >= 0.0, "Preï¿½o nï¿½o pode ser negativo")
 								.thenDo(r -> {
 									Produto produto = loadOrCreate(r);
 									produto.setNome(r.getNome());
@@ -51,10 +54,24 @@ public class ProdutoService {
 	}
 	
 	public List<ProdutoListado> listarProdutos(ProdutoFilter filtro) {
-		return listagemProdutosRepository.pesquisar(filtro);
+		List<ProdutoListado> produtos = listagemProdutosRepository.pesquisar(filtro);
+		
+		produtos.forEach(produto -> {
+			Double valorProdutoComPromocao = valorProdutoService.getValorProduto(produto.getId());
+			produto.setPreco(valorProdutoComPromocao);
+		});
+		
+		return produtos;
 	}
 	
 	public ProdutoView visualizar(Integer id) {
-		return listagemProdutosRepository.visualizar(id);
+		ProdutoView produto = listagemProdutosRepository.visualizar(id);
+		
+		if(produto != null) {
+			Double valorProdutoComPromocao = valorProdutoService.getValorProduto(produto.getId());
+			produto.setPreco(valorProdutoComPromocao);
+		}
+		
+		return produto;
 	}
 }

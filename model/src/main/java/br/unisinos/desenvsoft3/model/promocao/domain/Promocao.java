@@ -33,11 +33,11 @@ public class Promocao {
 	private Produto produto;
 	
 	@NotNull
-	@Column(name = "DT_PEDIDO")
+	@Column(name = "DT_INICIAL")
 	private Date dtInicial;
 	
 	@NotNull
-	@Column(name = "DT_PEDIDO")
+	@Column(name = "DT_FINAL")
 	private Date dtFinal;
 	
 	@NotNull

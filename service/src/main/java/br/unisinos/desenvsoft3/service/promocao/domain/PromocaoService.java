@@ -1,7 +1,7 @@
 package br.unisinos.desenvsoft3.service.promocao.domain;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +36,7 @@ public class PromocaoService {
 								.ifValid(r -> r.getPeDesconto() != null, "Informe o % de desconto.")
 								.ifValid(r -> r.getPeDesconto() > 0D && r.getPeDesconto() < 100D, "Desconto deve estar entre 0 e 100%.")
 								.ifValid(r -> produtoDAO.existemTodosProdutos(r.getIdsProdutos()), "Produtos inválidos.")
-								.ifValid(r -> r.getDtFim().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.now()), "Data final não pode ser menor que data atual")
+								.ifValid(r -> r.getDtFim().toInstant().atOffset(ZoneOffset.UTC).toLocalDate().isAfter(LocalDate.now()), "Data final não pode ser menor que data atual")
 								.thenDo(this::salvarPromocoes);
 	}
 	
@@ -68,5 +68,15 @@ public class PromocaoService {
 		promocaoDAO.deletarPromocoes(promocoesEncerradas.stream().map(PromocaoView::getId).collect(Collectors.toList()));
 		promocoes.removeAll(promocoesEncerradas);
 		return promocoes;
+	}
+
+	public GenericResponse removerPromocao(Integer idPromocao) {
+		Promocao promocao = promocaoDAO.get(idPromocao);
+		if(promocao == null) {
+			return GenericResponse.error("Promoção inexistente.");
+		}
+		
+		promocaoDAO.deletar(promocao);
+		return GenericResponse.ok();
 	}
 }

@@ -10,6 +10,7 @@ import br.unisinos.desenvsoft3.model.pedido.domain.CarrinhoDeComprasItem;
 import br.unisinos.desenvsoft3.model.produto.dao.ProdutoDAO;
 import br.unisinos.desenvsoft3.model.produto.domain.Produto;
 import br.unisinos.desenvsoft3.service.generic.util.GenericResponse;
+import br.unisinos.desenvsoft3.service.produto.domain.ValorProdutoService;
 
 @Service
 public class CarrinhoDeComprasService {
@@ -23,11 +24,14 @@ public class CarrinhoDeComprasService {
 	@Autowired
 	private ProdutoDAO produtoDAO;
 	
+	@Autowired
+	private ValorProdutoService valorProdutoService;
+	
 	public CarrinhoDeComprasView getCarrinhoDeCompras(Integer idUsuario) {
 		CarrinhoDeCompras carrinho = carrinhoDeComprasDAO.getByUsuario(idUsuario);
 		
 		if(carrinho != null) {
-			return new CarrinhoDeComprasViewFactory().create(carrinho);
+			return new CarrinhoDeComprasViewFactory().with(valorProdutoService).create(carrinho);
 		} else {
 			return new CarrinhoDeComprasView();
 		}
@@ -36,7 +40,7 @@ public class CarrinhoDeComprasService {
 	public GenericResponse adicionarAoCarrinhoDeCompras(Integer idProduto, Integer idUsuario, Integer quantidade) {
 		Produto produto = produtoDAO.carregar(idProduto);
 		if(produto == null) {
-			return GenericResponse.error("Produto inválido.");
+			return GenericResponse.error("Produto invï¿½lido.");
 		}
 		
 		CarrinhoDeCompras carrinho = carrinhoDeComprasDAO.getByUsuario(idUsuario);
@@ -61,7 +65,7 @@ public class CarrinhoDeComprasService {
 	public GenericResponse removerDoCarrinhoDeCompras(Integer idProduto, Integer idUsuario) {
 		Produto produto = produtoDAO.carregar(idProduto);
 		if(produto == null) {
-			return GenericResponse.error("Produto inválido.");
+			return GenericResponse.error("Produto invï¿½lido.");
 		}
 		
 		CarrinhoDeCompras carrinho = carrinhoDeComprasDAO.getByUsuario(idUsuario);
@@ -80,7 +84,7 @@ public class CarrinhoDeComprasService {
 
 	public GenericResponse alterarQuantidadeDeProduto(Integer idProduto, Integer quantidade, Integer idUsuario) {
 		if(quantidade < 0) {
-			return GenericResponse.error("Quantidade não pode ser menor que zero.");
+			return GenericResponse.error("Quantidade nï¿½o pode ser menor que zero.");
 		}
 		
 		CarrinhoDeCompras carrinho = carrinhoDeComprasDAO.getByUsuario(idUsuario);
@@ -94,6 +98,6 @@ public class CarrinhoDeComprasService {
 			}
 		}
 		
-		return GenericResponse.error("Produto não adicionado ao carrinho.");
+		return GenericResponse.error("Produto nï¿½o adicionado ao carrinho.");
 	}
 }

@@ -1,5 +1,6 @@
 package br.unisinos.desenvsoft3.model.generic.dao;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,7 +69,11 @@ class HibernateQueryExecutor implements QueryExecutor {
 			}
 		} else if(namedParameters != null) {
 			for (Entry<String, Object> entry : namedParameters.entrySet()) {
-				query.setParameter(entry.getKey(), entry.getValue());
+				if(entry.getValue() instanceof Collection) {
+					query.setParameterList(entry.getKey(), (Collection<?>) entry.getValue());
+				} else {
+					query.setParameter(entry.getKey(), entry.getValue());
+				}
 			}
 		}
 	}

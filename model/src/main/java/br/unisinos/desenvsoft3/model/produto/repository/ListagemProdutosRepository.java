@@ -18,7 +18,7 @@ public class ListagemProdutosRepository {
 		HQLBuilder hql = new HQLBuilder()
 				.append(" SELECT prod.id as id ")
 				.append("		,prod.nome as nome ")
-				.append("		,prod.preco as preco ")
+				.append("		,prod.preco as precoCheio ")
 				.append("		,prod.estoque as estoque ")
 				.append("		,(CASE WHEN prod.estoque = 0 THEN false ELSE true END) as temEstoque ")
 				.append(" FROM Produto prod ")
@@ -37,7 +37,7 @@ public class ListagemProdutosRepository {
 				.append(" SELECT prod.id as id ")
 				.append("		,prod.nome as nome ")
 				.append("		,prod.descricao as descricao ")
-				.append("		,prod.preco as preco ")
+				.append("		,prod.preco as precoCheio ")
 				.append("		,prod.estoque as estoque ")
 				.append(" FROM Produto prod ")
 				.append(" WHERE prod.id = :id ", id);
