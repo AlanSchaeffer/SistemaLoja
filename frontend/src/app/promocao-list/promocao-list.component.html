@@ -1,0 +1,14 @@
+<div class="text-center" style="padding-top: 10px;">
+  <div *ngIf="!loading && promocoes.length == 0">
+    <p>Nenhuma promoção cadastrada</p>
+  </div>
+  <div *ngIf="!loading">
+    <div *ngFor="let promocao of promocoes">
+      <p>{{promocao.nmProduto}} - De: {{promocao.dtInicial}}, Até: {{promocao.dtFinal}} - Desconto:{{promocao.peDesconto}}%</p><br />
+      <button (click)="excluir(promocao.id)">Excluir</button>
+    </div>
+  </div>
+  <div>
+    <a href="/admin">Voltar para página inicial</a>
+  </div>
+</div>
