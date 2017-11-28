@@ -41,7 +41,10 @@ export class PromocaoService {
       peDesconto: promocao.peDesconto 
     }, this.userService.getHeaders())
       .map(result => {
-        return result.ok === true;
+        if (!result.json().success){
+          alert(result.json().message);
+        }
+        return result.ok === true && result.json().success === true;
       });
   }
 
@@ -53,7 +56,7 @@ export class PromocaoService {
   }
 
   private convertDateFrom(stringDate){
-    if (stringDate.length < 10) return null;
+    if (stringDate == null || stringDate.length < 10) return null;
     new Date()
     return new Date(parseInt(stringDate.substr(6)),
         parseInt(stringDate.substr(3,2)) - 1,
