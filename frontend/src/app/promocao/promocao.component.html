@@ -1,0 +1,27 @@
+<div class="text-center" style="padding: 15px 0;">
+  <div>
+    <label>Data inicial (DD/MM/YYYY):</label><br />
+    <input type="text" [(ngModel)]="promocao.dtInicial" />
+  </div>
+  <div>
+    <label>Data final (DD/MM/YYYY):</label><br />
+    <input type="text" [(ngModel)]="promocao.dtFinal" />
+  </div>
+  <div>
+    <label>Percentual de desconto:</label><br />
+    <input type="text" [(ngModel)]="promocao.peDesconto" />
+  </div>
+  <div *ngIf="!loading">
+    <ul>
+      <li *ngFor="let product of promocao.produtos">
+        <input type="checkbox" [(ngModel)]="product.checked" value="product.id" />{{product.name}}
+      </li>
+    </ul>
+  </div>
+  <div>
+    <button (click)="save()">Salvar Promoção</button>
+  </div>
+  <div>
+    <a href="/admin">Voltar para a página inicial</a>
+  </div>
+</div>

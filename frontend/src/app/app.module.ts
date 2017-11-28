@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { ProductsService } from './products.service';
 import { CartService } from './cart-service';
 import { OrderService } from './order-service';
+import { PromocaoService } from './promocao-service';
 
 import { RouterModule }   from '@angular/router';
 import { UsersComponent } from './users/users.component';
@@ -23,6 +24,8 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 import { OrderComponent } from './order/order.component';
+import { PromocaoComponent } from './promocao/promocao.component';
+import { PromocaoListComponent } from './promocao-list/promocao-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { OrderComponent } from './order/order.component';
     CustomerHomeComponent,
     ShoppingCartComponent,
     CustomerOrdersComponent,
-    OrderComponent
+    OrderComponent,
+    PromocaoComponent,
+    PromocaoListComponent
   ],
   imports: [
     HttpModule,
@@ -96,10 +101,18 @@ import { OrderComponent } from './order/order.component';
       {
         path: 'admin/orders',
         component: CustomerOrdersComponent
+      },
+      {
+        path: 'admin/promocao',
+        component: PromocaoComponent
+      },
+      {
+        path: 'admin/promocoes',
+        component: PromocaoListComponent
       }
     ])
   ],
-  providers: [UserService, ProductsService, CartService, OrderService],
+  providers: [UserService, ProductsService, CartService, OrderService, PromocaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

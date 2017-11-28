@@ -37,13 +37,13 @@ public class PromocaoDAO {
 		dataAccessManager.flush();
 	}
 	
-	public List<Promocao> getPromocoesDoProdutoNaData(Integer idProduto, Date data) {
+	public List<Promocao> getPromocoesDoProdutoNaData(Integer idProduto, Date data) {		
 		HQLBuilder hql = new HQLBuilder()
 				.append(" SELECT prom ")
 				.append(" FROM Promocao prom ")
 				.append(" WHERE prom.produto.id = :idProduto ", idProduto)
 				.append(" AND prom.dtInicial <= :data ", data)
-				.append(" AND prom.dtFinal >= :data ")
+				.append(" AND prom.dtFinal >= :data ", data)
 				.append(" ORDER BY prom.dtInicial DESC ");
 		return dataAccessManager.query(hql.toString())
 								.namedParameters(hql.namedParameters())
